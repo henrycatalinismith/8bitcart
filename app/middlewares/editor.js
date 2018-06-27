@@ -8,6 +8,7 @@ const actions = require("../actions").default;
 
 let cm;
 const markers = [];
+const lineWidgets = [];
 
 export const middleware = createMiddleware((cancel, before, after) => ({
   [after(actions.START)](store, action) {
@@ -31,11 +32,13 @@ export const middleware = createMiddleware((cancel, before, after) => ({
 
   [after(actions.CHANGE_CODE)](store, action) {
     markers.forEach(marker => marker.clear());
+    lineWidgets.forEach(l => cm.removeLineWidget(l));
   },
 
   [after(actions.SYNTAX_ERROR)](store, action) {
     const line = action.line;
     const column = action.column;
+    const message = action.message;
 
     const from = {
       line: line - 1,
@@ -51,8 +54,14 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       className: 'syntax-error',
     };
 
+    const lineWidget = document.createElement('div');
+    lineWidget.style.backgroundColor = "red";
+    lineWidget.style.height = "20px";
+    lineWidget.textContent = message;
+
     setTimeout(() => {
       markers.push(cm.markText(from, to, options));
+      lineWidgets.push(cm.addLineWidget(line - 1, lineWidget));
     }, 100);
   }
 }));
