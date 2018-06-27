@@ -9,3 +9,6 @@ export const select = {
 };
 
 const selectors = createSelectors(select);
+
+export default selectors;
+
