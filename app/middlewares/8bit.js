@@ -1,3 +1,4 @@
+const { parse } = require("../8bit");
 const eightbit = require("../8bit").default;
 
 const { createMiddleware } = require("signalbox");
@@ -9,6 +10,18 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     const state = store.getState();
     const canvas = document.querySelector('canvas');
     const code = select("editor").from(state).code();
+
+    let ast;
+    try {
+      ast = parse(code);
+    } catch (e) {
+      store.dispatch(actions.syntaxError(
+        e.line,
+        e.column,
+        e.message,
+      ));
+      return;
+    }
 
     eightbit(code, canvas);
   }

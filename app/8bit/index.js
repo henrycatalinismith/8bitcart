@@ -59,6 +59,10 @@ const rectfill = ctx => (x0, y0, x1, y1, color) => {
   ctx.fillRect(x0, y0, x1-x0, y1-y0);
 }
 
+export function parse(lua) {
+  return lua2js.parse(lua);
+}
+
 export default function run(lua, canvas) {
   const ast = lua2js.parse(lua);
 

@@ -2,23 +2,26 @@ body {
   margin: 0;
 }
 
+.syntax-error {
+  color: red;
+}
+
 .Cart {
   display: flex;
 
   &__canvas {
-    background: blue;
+    //background: blue;
   }
 
   &__canvasElement {
-    background: green;
+    background: #111;
     padding-top: 100%;
     width: 100%;
   }
 
   &__code {
-    background: red;
+    //background: red;
   }
-
 
   @media (orientation: portrait) {
     flex-direction: column;
