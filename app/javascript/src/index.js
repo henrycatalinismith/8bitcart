@@ -1,3 +1,5 @@
+const CodeMirror = require("codemirror");
+
 document.addEventListener('DOMContentLoaded', () => {
   const textarea = document.querySelector('.Cart__textarea');
 
