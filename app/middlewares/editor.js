@@ -22,9 +22,9 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       cursorBlinkRate: 500,
     });
 
-    //cm.on("keyup", () => {
-      //store.dispatch(actions.changeCode(cm.getValue()));
-    //})
+    cm.on("keyup", () => {
+      store.dispatch(actions.changeCode(cm.getValue()));
+    })
   }
 }));
 
