@@ -1,17 +1,22 @@
-const CodeMirror = require("codemirror");
+const { createApp } = require("signalbox");
+
+const actions = require("./actions").default;
+const middlewares = require("./middlewares").default;
+const selectors = require("./reducers/selectors").default;
+const createStore = require("./reducers").default;
+const thunks = require("./thunks").default;
 
 document.addEventListener('DOMContentLoaded', () => {
-  const textarea = document.querySelector('.Cart__textarea');
+  const initialState = {
+    viewport: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    }
+  };
 
-  const cm = CodeMirror.fromTextArea(textarea, {
-    lineNumbers: true,
-    //mode: "lua",
-    autofocus: true,
-    indentWithTabs: false,
-    indentSize: 2,
-    indentUnit: 1,
-    smartIndent: true,
-    cursorBlinkRate: 500,
-  });
+  const store = createStore(initialState);
+  const app = createApp(store, actions, middlewares, selectors, thunks);
+
+  app.dispatch.start();
 });
 
