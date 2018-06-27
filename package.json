@@ -3,7 +3,10 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
-    "codemirror": "^5.39.0"
+    "codemirror": "^5.39.0",
+    "redux": "^4.0.0",
+    "redux-thunk": "^2.3.0",
+    "signalbox": "file:./app/signalbox"
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
