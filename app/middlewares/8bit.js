@@ -24,6 +24,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
         // receive a memory update from the worker
         case 'MEMORY':
           Object.keys(data.changes).forEach(addr => {
+            console.log(addr, data.changes[addr]);
             memory[addr] = data.changes[addr];
           });
           break;
