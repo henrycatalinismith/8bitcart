@@ -53,7 +53,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
 
   [after(actions.CHANGE_CODE)](store, action) {
     const state = store.getState();
-    const code = select("editor").from(state).code();
+    const code = select("composer").from(state).code();
 
     let ast;
     try {

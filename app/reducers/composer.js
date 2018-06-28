@@ -7,15 +7,15 @@ const initialState = {
 };
 
 export const reducer = createReducer(initialState, {
-  [actions.CHANGE_CODE](editor, action) {
+  [actions.CHANGE_CODE](composer, action) {
     return {
-      ...editor,
-      code: action.editor.code,
+      ...composer,
+      code: action.composer.code,
     };
   },
 });
 
 export const selectors = {
-  code: editor => editor.code,
+  code: composer => composer.code,
 };
 

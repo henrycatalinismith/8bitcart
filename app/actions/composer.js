@@ -5,6 +5,6 @@ export default createActions(["START", "CHANGE_CODE"], types => ({
 
   changeCode: code => ({
     type: types.CHANGE_CODE,
-    editor: { code }
+    composer: { code }
   })
 }));
