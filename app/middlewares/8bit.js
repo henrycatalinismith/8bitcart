@@ -45,7 +45,6 @@ export const middleware = createMiddleware((cancel, before, after) => ({
         console.log('stopping');
       }
     };
-    requestAnimationFrame(raf);
   },
 
   [after(actions.CHANGE_CODE)](store, action) {
@@ -65,6 +64,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     }
 
     running = true
+    requestAnimationFrame(raf);
     worker.postMessage({
       type: 'RUN_CODE',
       code,
