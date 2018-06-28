@@ -1,12 +1,12 @@
-const { parse, render } = require("../8bit");
+const { parse, render } = require("../emulator");
 
 const { createMiddleware } = require("signalbox");
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
 let canvas;
-let workerPath;
-let worker;
+let emulatorPath;
+let emulator;
 let raf;
 let running = true;
 let memory = new Uint8Array(0x8000);
@@ -15,13 +15,13 @@ memory[0x7000] = 9; // one yellow pixel halfway down the screen
 
 export const middleware = createMiddleware((cancel, before, after) => ({
   [after(actions.START)](store, action) {
-    workerPath = document.querySelector('#worker').textContent.trim();
-    worker = new Worker(workerPath);
+    emulatorPath = document.querySelector('#emulator').textContent.trim();
+    emulator = new Worker(emulatorPath);
     canvas = document.querySelector('canvas');
 
-    worker.onmessage = ({ data }) => {
+    emulator.onmessage = ({ data }) => {
       switch (data.type) {
-        // receive a memory update from the worker
+        // receive a memory update from the emulator
         case 'MEMORY':
           Object.keys(data.changes).forEach(addr => {
             console.log(addr, data.changes[addr]);
@@ -29,14 +29,14 @@ export const middleware = createMiddleware((cancel, before, after) => ({
           });
           break;
 
-        // the worker is done!
+        // the emulator is done!
         case 'CODE_FINISHED':
           running = false;
           break;
       }
     }
 
-    worker.postMessage({
+    emulator.postMessage({
       type: 'INITIALIZE',
       memory,
     });
@@ -69,7 +69,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
 
     running = true
     requestAnimationFrame(raf);
-    worker.postMessage({
+    emulator.postMessage({
       type: 'RUN_CODE',
       code,
     });
