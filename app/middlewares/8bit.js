@@ -21,13 +21,16 @@ export const middleware = createMiddleware((cancel, before, after) => ({
 
     worker.onmessage = ({ data }) => {
       switch (data.type) {
-        case 'CODE_FINISHED':
-          running = false;
+        // receive a memory update from the worker
+        case 'MEMORY':
+          Object.keys(data.changes).forEach(addr => {
+            memory[addr] = data.changes[addr];
+          });
           break;
 
-        case 'POKE':
-          //console.log(`${data.address}: ${data.value}`);
-          memory[data.address] = data.value;
+        // the worker is done!
+        case 'CODE_FINISHED':
+          running = false;
           break;
       }
     }
