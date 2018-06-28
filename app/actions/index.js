@@ -1,12 +1,10 @@
-const editor = require("./editor").default;
+const composer = require("./composer").default;
 const emulator = require("./emulator").default;
-const global = require("./global").default;
 const viewport = require("./viewport").default;
 
 const actions = Object.assign({},
-  editor,
+  composer,
   emulator,
-  global,
   viewport,
 );
 
