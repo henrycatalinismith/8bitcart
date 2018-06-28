@@ -4,9 +4,9 @@ const pegjs = require("pegjs");
 const saferEval = require("safer-eval");
 const { throttle } = require("underscore");
 
-const eightbit = require("../8bit").default;
-const grammar = require("../8bit/grammar.pegjs");
-const helpers = require("../8bit/helpers.raw.js");
+const eightbit = require("../emulator").default;
+const grammar = require("../emulator/grammar.pegjs");
+const helpers = require("../emulator/helpers.raw.js");
 
 console.log(pegjs);
 const parser = pegjs.buildParser(helpers + grammar);
