@@ -1,21 +1,31 @@
 const escodegen = require("escodegen");
 const lua2js = require("lua2js");
 const saferEval = require("safer-eval");
+const { throttle } = require("underscore");
 
 const eightbit = require("../8bit").default;
 
 let memory;
+let changes;
+
+const update = throttle(() => {
+  postMessage({
+    type: 'MEMORY',
+    changes,
+  });
+  changes = {};
+}, 16);
 
 onmessage = ({ data }) => {
   switch (data.type) {
     case "INITIALIZE":
       memory = data.memory;
+      changes = {};
       break;
 
     case "RUN_CODE":
       const ast = lua2js.parse(data.code);
 
-      console.log(ast);
       const javascript = escodegen.generate(ast, {
         format: {
           indent: {
@@ -36,16 +46,14 @@ onmessage = ({ data }) => {
       const evalContext = {
         __lua: lua2js.stdlib.__lua,
         poke(address, value) {
-          postMessage({
-            type: "POKE",
-            address,
-            value,
-          });
+          memory[address] = value;
+          changes[address] = value;
+          update();
         }
       };
 
+      changes = {};
       saferEval(cart, evalContext)
-      console.log(cart);
 
       setTimeout(() => {
         postMessage({ type: "CODE_FINISHED" });
