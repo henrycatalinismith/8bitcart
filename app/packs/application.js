@@ -1,10 +1,22 @@
-/* eslint no-console:0 */
-// This file is automatically compiled by Webpack, along with any other files
-// present in this directory. You're encouraged to place your actual application logic in
-// a relevant structure within app/javascript and only use these pack files to reference
-// that code so it'll be compiled.
-//
-// To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
-// layout file, like app/views/layouts/application.html.erb
+const { createApp } = require("signalbox");
 
-require('../index.js');
+const actions = require("../actions").default;
+const middlewares = require("../middlewares").default;
+const selectors = require("../reducers/selectors").default;
+const createStore = require("../reducers").default;
+const thunks = require("../thunks").default;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const initialState = {
+    viewport: {
+      width: window.innerWidth,
+      height: window.innerHeight,
+    }
+  };
+
+  const store = createStore(initialState);
+  const app = createApp(store, actions, middlewares, selectors, thunks);
+
+  app.dispatch.start();
+});
+
