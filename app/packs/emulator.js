@@ -12,7 +12,6 @@ console.log(pegjs);
 const parser = pegjs.buildParser(helpers + grammar);
 console.log(parser);
 
-
 let memory;
 let changes;
 
