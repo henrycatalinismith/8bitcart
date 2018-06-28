@@ -6,10 +6,12 @@
     <%= csp_meta_tag %>
 
     <%= javascript_pack_tag 'application' %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
     <%= yield %>
+
+    <script type="application/json" id="worker"><%= asset_pack_path 'worker.js' %></script>
   </body>
 </html>

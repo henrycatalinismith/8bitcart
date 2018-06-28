@@ -63,6 +63,20 @@ export function parse(lua) {
   return lua2js.parse(lua);
 }
 
+export function render(memory, canvas) {
+  const ctx = canvas.getContext('2d');
+  const px = canvas.width / 128;
+  for (let addr = 0x6000; addr <= 0x7FFF; addr++) {
+    const i = addr - 0x6000;
+    const x = (i * 2) % 128;
+    const y = Math.floor(i / 64);
+    const color = memory[addr]
+
+    ctx.fillStyle = colors[color];
+    ctx.fillRect(x * px, y * px, px, px);
+  }
+}
+
 export default function run(lua, canvas) {
   const ast = lua2js.parse(lua);
 
