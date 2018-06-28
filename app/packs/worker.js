@@ -1,9 +1,17 @@
 const escodegen = require("escodegen");
 const lua2js = require("lua2js");
+const pegjs = require("pegjs");
 const saferEval = require("safer-eval");
 const { throttle } = require("underscore");
 
 const eightbit = require("../8bit").default;
+const grammar = require("../8bit/grammar.pegjs");
+const helpers = require("../8bit/helpers.raw.js");
+
+console.log(pegjs);
+const parser = pegjs.buildParser(helpers + grammar);
+console.log(parser);
+
 
 let memory;
 let changes;
@@ -24,7 +32,7 @@ onmessage = ({ data }) => {
       break;
 
     case "RUN_CODE":
-      const ast = lua2js.parse(data.code);
+      const ast = parser.parse(data.code);
 
       const javascript = escodegen.generate(ast, {
         format: {
