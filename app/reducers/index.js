@@ -4,11 +4,11 @@ const { createSelectors } = require("signalbox");
 
 const middleware = require("../middlewares").default;
 
-const editor = require("./editor");
+const composer = require("./composer");
 const viewport = require("./viewport");
 
 const reducers = {
-  editor: editor.reducer,
+  composer: composer.reducer,
   viewport: viewport.reducer,
 };
 
