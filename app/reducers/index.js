@@ -5,10 +5,12 @@ const { createSelectors } = require("signalbox");
 const middleware = require("../middlewares").default;
 
 const composer = require("./composer");
+const emulator = require("./emulator");
 const viewport = require("./viewport");
 
 const reducers = {
   composer: composer.reducer,
+  emulator: emulator.reducer,
   viewport: viewport.reducer,
 };
 
