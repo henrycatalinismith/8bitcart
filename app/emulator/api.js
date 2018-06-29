@@ -10,4 +10,8 @@ module.exports = memory => ({
   poke(address, value) {
     memory[address] = value;
   },
+
+  rnd(max) {
+    return Math.random() * max;
+  }
 });
