@@ -19,5 +19,9 @@ module.exports = memory => ({
 
   rnd(max) {
     return Math.random() * max;
-  }
+  },
+
+  sin(angle) {
+    return Math.sin((-angle * 360) * (π / 180))
+  },
 });
