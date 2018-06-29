@@ -1,6 +1,10 @@
 const π = Math.PI;
 
 module.exports = memory => ({
+  abs(num) {
+    return Math.abs(num);
+  },
+
   //atan2(dx, dy) {
   //},
 
@@ -57,6 +61,10 @@ module.exports = memory => ({
     return Math.random() * max;
   },
 
+  sgn(number) {
+    return number < 0 ? -1 : 1;
+  },
+
   shl(num, bits) {
     return num << bits;
   },
@@ -67,6 +75,10 @@ module.exports = memory => ({
 
   sin(angle) {
     return Math.sin((-angle * 360) * (π / 180))
+  },
+
+  sqrt(num) {
+    return Math.sqrt(num);
   },
 
   sub(str, start, end) {
