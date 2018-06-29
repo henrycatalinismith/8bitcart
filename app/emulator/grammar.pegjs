@@ -685,7 +685,7 @@ Literal =
     } /
     b: "0" [Xx] b:$([0-9a-fA-F]+)
     {
-        return { type: "Literal", value: parseInt(b), loc: loc(), range: range()  }
+        return { type: "Literal", value: parseInt(b, 16), loc: loc(), range: range()  }
 
     } /
     b: Number
