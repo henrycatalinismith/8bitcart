@@ -9,6 +9,14 @@ describe("api", () => {
     api = Api(memory);
   });
 
+  describe("abs", () => {
+    it("returns the absolute value of a number", () => {
+      expect(api.abs(3.1)).toBe(3.1);
+      expect(api.abs(-3.1)).toBe(3.1);
+      expect(api.abs(0)).toBe(0);
+    });
+  });
+
   // cant get this to return output like the docs
   //describe("atan2", () => {
     //it("calculates the arctangent of dy/dx", () => {
@@ -154,6 +162,14 @@ describe("api", () => {
     });
   });
 
+  describe("sgn", () => {
+    it("returns the sign of a number, 1 for positive, -1 for negative", () => {
+      expect(api.sgn(100)).toBe(1);
+      expect(api.sgn(0)).toBe(1);
+      expect(api.sgn(-14)).toBe(-1);
+    });
+  });
+
   describe("sin", () => {
     it("calculates the sine of an angle", () => {
       expect(api.sin(0)).toBeCloseTo(0);
@@ -165,6 +181,13 @@ describe("api", () => {
       expect(api.sin(0.75)).toBeCloseTo(1);
       expect(api.sin(0.875)).toBeCloseTo(0.7071);
       expect(api.sin(1)).toBeCloseTo(0);
+    });
+  });
+
+  describe("sqrt", () => {
+    it("calculates the square root of a number", () => {
+      expect(api.sqrt(9)).toBe(3);
+      expect(api.sqrt(0.25)).toBe(0.5);
     });
   });
 
