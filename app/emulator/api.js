@@ -1,5 +1,10 @@
 const π = Math.PI;
 
+const c2hex = c => (
+  (str => '00'.substring(0, 2 - str.length) + str)
+  (c.toString(16))
+)
+
 module.exports = memory => ({
   abs(num) {
     return Math.abs(num);
@@ -55,6 +60,9 @@ module.exports = memory => ({
 
   poke(address, value) {
     memory[address] = value;
+  },
+
+  pset(x, y, c) {
   },
 
   rnd(max) {
