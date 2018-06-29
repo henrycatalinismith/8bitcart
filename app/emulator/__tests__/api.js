@@ -31,5 +31,14 @@ describe("api", () => {
       expect(memory[0x6000]).toBe(16);
     });
   });
+
+  describe("rnd", () => {
+    it("generates a random number between 0 and the given maximum", () => {
+      const backup = Math.random;
+      Math.random = () => 0.5;
+      expect(api.rnd(10)).toBe(5);
+      Math.random = backup;
+    });
+  });
 });
 
