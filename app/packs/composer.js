@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
     composer: {
       lastUpdate: new Date,
     },
+    emulator: {
+      running: false,
+    },
     viewport: {
       width: window.innerWidth,
       height: window.innerHeight,
