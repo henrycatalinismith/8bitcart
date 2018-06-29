@@ -47,6 +47,10 @@ module.exports = memory => ({
     return Math.cos((angle * 360) * (π / 180))
   },
 
+  cls() {
+    memory.fill(0, 0x6000, 0x7fff);
+  },
+
   //lshr(num, bits) {
   //},
 

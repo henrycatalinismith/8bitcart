@@ -60,6 +60,16 @@ describe("api", () => {
     });
   });
 
+  describe("cls", () => {
+    it("clears the graphics buffer", () => {
+      api.memset(0x6000, 0x77, 0x2000);
+      api.cls();
+      for (let i = 0x6000; i <= 0x7fff; i++) {
+        expect(memory[i]).toBe(0);
+      }
+    });
+  });
+
   describe("cos", () => {
     it("calculates the cosine of an angle", () => {
       expect(api.cos(0)).toBeCloseTo(1);

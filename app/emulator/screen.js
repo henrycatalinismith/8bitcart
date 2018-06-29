@@ -17,6 +17,25 @@ const colors = [
   "#FFCCAA",
 ];
 
+const pxa = (x, y) => {
+  const addr = 0x6000 + ((x >> 1) + y * 64)+1;
+  const and = x & 1;
+  const add = and ? 1 : 0;
+  return 0x6000 + ((x >> 1) + y * 64)+add;
+}
+
+const pxc = (x, y, memory) => {
+  const addr = pxa(x, y);
+  const and = x & 1;
+  const add = and ? 1 : 0;
+  const px = memory[addr];
+  if (and) {
+    return px & 0xF;
+  } else {
+    return px;
+  }
+}
+
 export default class Screen {
   constructor(canvas) {
     this.canvas = canvas;
@@ -39,15 +58,25 @@ export default class Screen {
   }
 
   render() {
+    for (let x = 0; x < 128; x++) {
+      for (let y = 0; y < 128; y++) {
+        const color = pxc(x, y, this.memory);
+        //const color = this.memory[addr]
+        this.ctx.fillStyle = colors[color];
+        this.ctx.fillRect(x * this.px, y * this.px, this.px, this.px);
+      }
+    }
+
+    /*
     for (let addr = 0x6000; addr <= 0x7FFF; addr++) {
       const i = addr - 0x6000;
       const x = (i * 2) % 128;
       const y = Math.floor(i / 64);
       const color = this.memory[addr]
-
       this.ctx.fillStyle = colors[color];
       this.ctx.fillRect(x * this.px, y * this.px, this.px, this.px);
     }
+    */
 
     if (this.running) {
       requestAnimationFrame(this.render);
