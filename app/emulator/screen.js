@@ -18,10 +18,10 @@ const colors = [
 ];
 
 const pxa = (x, y) => {
-  const addr = 0x6000 + ((x >> 1) + y * 64)+1;
+  const addr = ((x >> 1) + y * 64)+1;
   const and = x & 1;
   const add = and ? 1 : 0;
-  return 0x6000 + ((x >> 1) + y * 64)+add;
+  return ((x >> 1) + y * 64)+add;
 }
 
 const pxc = (x, y, memory) => {
