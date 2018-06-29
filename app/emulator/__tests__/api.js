@@ -134,6 +134,18 @@ describe("api", () => {
     });
   });
 
+  describe("pget", () => {
+    it("[left] gets the color value of a pixel at the given coordinates", () => {
+      memory[0x6000] = 8;
+      expect(api.pget(0, 0)).toBe(8);
+    });
+
+    it("[right] gets the color value of a pixel at the given coordinates", () => {
+      memory[0x6001] = 8;
+      expect(api.pget(1, 0)).toBe(8);
+    });
+  });
+
   //describe("pset", () => {
     //it("sets a pixel in the graphics buffer", () => {
       //api.pset(0, 0, 15);

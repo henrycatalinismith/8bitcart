@@ -1,5 +1,24 @@
 const π = Math.PI;
 
+const pxa = (x, y) => {
+  const addr = 0x6000 + ((x >> 1) + y * 64)+1;
+  const and = x & 1;
+  const add = and ? 1 : 0;
+  return 0x6000 + ((x >> 1) + y * 64)+add;
+}
+
+const pxc = (x, y, memory) => {
+  const addr = pxa(x, y);
+  const and = x & 1;
+  const add = and ? 1 : 0;
+  const px = memory[addr];
+  if (and) {
+    return px & 0xF;
+  } else {
+    return px;
+  }
+}
+
 module.exports = memory => ({
   abs(num) {
     return Math.abs(num);
@@ -55,6 +74,10 @@ module.exports = memory => ({
 
   poke(address, value) {
     memory[address] = value;
+  },
+
+  pget(x, y) {
+    return pxc(x, y, memory);
   },
 
   pset(x, y, c) {
