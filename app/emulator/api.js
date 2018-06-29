@@ -27,6 +27,20 @@ module.exports = memory => ({
   //lshr(num, bits) {
   //},
 
+  max(first, second = 0) {
+    return Math.max(first, second);
+  },
+
+  mid(first, second, third) {
+    const arr = [first, second, third];
+    arr.sort();
+    return arr[1];
+  },
+
+  min(first, second = 0) {
+    return Math.min(first, second);
+  },
+
   memset(destaddr, val, len) {
     memory.fill(val, destaddr, destaddr + len);
   },
