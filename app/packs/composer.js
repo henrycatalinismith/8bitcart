@@ -8,6 +8,9 @@ const thunks = require("../thunks").default;
 
 document.addEventListener('DOMContentLoaded', () => {
   const initialState = {
+    composer: {
+      lastUpdate: new Date,
+    },
     viewport: {
       width: window.innerWidth,
       height: window.innerHeight,

@@ -6,16 +6,15 @@ const initialState = {
 };
 
 export const reducer = createReducer(initialState, {
-  /*
-  [actions.CHANGE_CODE](emulator, action) {
+  [actions.RUN_EMULATOR](emulator, action) {
     return {
       ...emulator,
+      lastAttempt: new Date,
     };
   },
-  */
 });
 
 export const selectors = {
-  //code: emulator => emulator.code,
+  lastAttempt: emulator => emulator.lastAttempt,
 };
 

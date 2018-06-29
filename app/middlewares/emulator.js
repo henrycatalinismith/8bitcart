@@ -52,12 +52,21 @@ export const middleware = createMiddleware((cancel, before, after) => ({
   },
 
   [after(actions.CHANGE_CODE)](store, action) {
+    // delay here or something?
+    // only wanna run the emulator at most like once per second
+    const state = store.getState();
+    const code = select("composer").from(state).code();
+    store.dispatch(actions.startEmulator(code));
+  },
+
+  [after(actions.START_EMULATOR)](store, action) {
     const state = store.getState();
     const code = select("composer").from(state).code();
 
     let ast;
+
     try {
-      ast = parse(code);
+      ast = parse(action.code);
     } catch (e) {
       store.dispatch(actions.syntaxError(
         e.line,
@@ -71,7 +80,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     requestAnimationFrame(raf);
     emulator.postMessage({
       type: 'RUN_CODE',
-      code,
+      code: action.code,
     });
   }
 }));
