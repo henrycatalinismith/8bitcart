@@ -22,7 +22,6 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     if (running) {
       store.dispatch(actions.stopEmulator());
     }
-    console.log('eee');
   },
 
   [after(actions.START_EMULATOR)](store, action) {

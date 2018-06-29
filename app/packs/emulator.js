@@ -20,12 +20,7 @@ createWorker("emulator", {
     }
 
     this.code = compile(this.ast);
-    console.log(action.code);
-    //console.log(JSON.stringify(this.ast));
-    console.log(this.code);
-
     this.memory = new Uint8Array(0x8000);
-    this.memory[0x6800] = 9;
 
     this.tick = () => dispatch(actions.tickEmulator(this.memory));
 
