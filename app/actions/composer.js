@@ -1,7 +1,7 @@
 const { createActions } = require("signalbox");
 
-export default createActions(["START", "CHANGE_CODE"], types => ({
-  start: () => ({ type: types.START }),
+export default createActions(["START_COMPOSER", "CHANGE_CODE"], types => ({
+  startComposer: () => ({ type: types.START_COMPOSER }),
 
   changeCode: code => ({
     type: types.CHANGE_CODE,

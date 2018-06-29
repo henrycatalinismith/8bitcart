@@ -20,6 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const store = createStore(initialState);
   const app = createApp(store, actions, middlewares, selectors, thunks);
 
-  app.dispatch.start();
+  app.dispatch.startComposer();
 });
 
