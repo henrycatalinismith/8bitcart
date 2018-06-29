@@ -54,5 +54,19 @@ describe("api", () => {
       Math.random = backup;
     });
   });
+
+  describe("sin", () => {
+    it("calculates the sine of an angle", () => {
+      expect(api.sin(0)).toBeCloseTo(0);
+      expect(api.sin(0.125)).toBeCloseTo(-0.7071);
+      expect(api.sin(0.25)).toBeCloseTo(-1);
+      expect(api.sin(0.375)).toBeCloseTo(-0.7071);
+      expect(api.sin(0.5)).toBeCloseTo(0);
+      expect(api.sin(0.625)).toBeCloseTo(0.7071);
+      expect(api.sin(0.75)).toBeCloseTo(1);
+      expect(api.sin(0.875)).toBeCloseTo(0.7071);
+      expect(api.sin(1)).toBeCloseTo(0);
+    });
+  });
 });
 
