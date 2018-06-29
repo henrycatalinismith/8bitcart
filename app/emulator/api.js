@@ -1,6 +1,9 @@
 const π = Math.PI;
 
 module.exports = memory => ({
+  //atan2(dx, dy) {
+  //},
+
   cos(angle) {
     return Math.cos((angle * 360) * (π / 180))
   },

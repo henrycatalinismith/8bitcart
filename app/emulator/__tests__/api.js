@@ -9,6 +9,21 @@ describe("api", () => {
     api = Api(memory);
   });
 
+  describe("atan2", () => {
+    it("calculates the arctangent of dy/dx", () => {
+      //expect(api.atan2(1, 0)).toBeCloseTo(0);
+      //expect(api.atan2(1, 1)).toBeCloseTo(0.875);
+      //expect(api.atan2(0, 1)).toBeCloseTo(0.75);
+      //expect(api.atan2(-1, 1)).toBeCloseTo(0.625);
+      //expect(api.atan2(-1, 0)).toBeCloseTo(0.5);
+      //expect(api.atan2(-1, -1)).toBeCloseTo(0.375);
+      //expect(api.atan2(0, -1)).toBeCloseTo(0.25);
+      //expect(api.atan2(1, -1)).toBeCloseTo(0.125);
+      //expect(api.atan2(99, 99)).toBeCloseTo(0.875);
+      //expect(api.atan2(0, 0)).toBeCloseTo(0.75);
+    });
+  });
+
   describe("cos", () => {
     it("calculates the cosine of an angle", () => {
       expect(api.cos(0)).toBeCloseTo(1);
