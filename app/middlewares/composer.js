@@ -5,6 +5,7 @@ const CodeMirror = require("codemirror");
 
 const { createMiddleware } = require("signalbox");
 const actions = require("../actions").default;
+const select = require("../reducers/selectors").default;
 
 let cm;
 const markers = [];
@@ -28,6 +29,10 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     cm.on("keyup", () => {
       store.dispatch(actions.changeCode(cm.getValue()));
     })
+  },
+
+  [cancel(actions.CHANGE_CODE)](store, action) {
+    return action.composer.code === select("composer").from(store).code();
   },
 
   [after(actions.CHANGE_CODE)](store, action) {

@@ -14,6 +14,14 @@ export const reducer = createReducer(initialState, {
     };
   },
 
+  [actions.SYNTAX_ERROR](emulator, action) {
+    return {
+      ...emulator,
+      running: false,
+      stopped: new Date,
+    };
+  },
+
   [actions.STOP_EMULATOR](emulator, action) {
     return {
       ...emulator,
