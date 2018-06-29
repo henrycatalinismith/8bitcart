@@ -2,7 +2,7 @@ const { createMiddleware } = require("signalbox");
 const actions = require("../actions").default;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [after(actions.START)](store, action) {
+  [after(actions.START_COMPOSER)](store, action) {
     const canvas = document.querySelector('canvas');
 
     canvas.width = canvas.offsetWidth;

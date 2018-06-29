@@ -11,7 +11,7 @@ const markers = [];
 const lineWidgets = [];
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [after(actions.START)](store, action) {
+  [after(actions.START_COMPOSER)](store, action) {
     const textarea = document.querySelector('.Cart__textarea');
 
     cm = CodeMirror.fromTextArea(textarea, {

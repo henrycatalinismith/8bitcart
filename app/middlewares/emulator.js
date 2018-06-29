@@ -14,7 +14,7 @@ let memory = new Uint8Array(0x8000);
 memory[0x7000] = 9; // one yellow pixel halfway down the screen
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [after(actions.START)](store, action) {
+  [after(actions.START_COMPOSER)](store, action) {
     emulatorPath = document.querySelector('#emulator').textContent.trim();
     emulator = new Worker(emulatorPath);
     canvas = document.querySelector('canvas');
