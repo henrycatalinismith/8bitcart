@@ -146,12 +146,12 @@ describe("api", () => {
     });
   });
 
-  //describe("pset", () => {
-    //it("sets a pixel in the graphics buffer", () => {
-      //api.pset(0, 0, 15);
-      //expect(memory[0x6000]).toBe(15);
-    //});
-  //});
+  describe("pset", () => {
+    it("sets a pixel in the graphics buffer", () => {
+      api.pset(0, 0, 15);
+      expect(memory[0x6000]).toBe(15);
+    });
+  });
 
   describe("rnd", () => {
     it("generates a random number between 0 and the given maximum", () => {
