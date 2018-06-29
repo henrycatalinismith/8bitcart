@@ -147,9 +147,16 @@ describe("api", () => {
   });
 
   describe("pset", () => {
-    it("sets a pixel in the graphics buffer", () => {
+    it("[left] sets a pixel in the graphics buffer", () => {
       api.pset(0, 0, 15);
       expect(memory[0x6000]).toBe(15);
+      expect(memory[0x6001]).toBe(0);
+    });
+
+    it("[right] sets a pixel in the graphics buffer", () => {
+      api.pset(1, 0, 15);
+      expect(memory[0x6000]).toBe(0);
+      expect(memory[0x6001]).toBe(15);
     });
   });
 
