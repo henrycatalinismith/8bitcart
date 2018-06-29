@@ -22,7 +22,7 @@ createWorker("emulator", {
     this.code = compile(this.ast);
     this.memory = new Uint8Array(0x8000);
 
-    this.tick = () => dispatch(actions.tickEmulator(this.memory));
+    this.tick = () => dispatch(actions.tickEmulator(this.memory.slice(0x6000)));
 
     this.tick();
     run(this.code, this.memory);
