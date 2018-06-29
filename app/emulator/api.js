@@ -81,6 +81,8 @@ module.exports = memory => ({
   },
 
   pset(x, y, c) {
+    const addr = pxa(x, y);
+    memory[addr] = c;
   },
 
   rnd(max) {
