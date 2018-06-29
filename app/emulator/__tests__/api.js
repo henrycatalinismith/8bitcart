@@ -75,6 +75,34 @@ describe("api", () => {
     //});
   //});
 
+  describe("max", () => {
+    it("returns the maximum of two numbers", () => {
+      expect(api.max(40, 20)).toBe(40);
+      expect(api.max(2.7, -3.5)).toBe(2.7);
+      expect(api.max(8, 8)).toBe(8);
+      expect(api.max(5)).toBe(5);
+      expect(api.max(-5)).toBe(0);
+    });
+  });
+
+  describe("mid", () => {
+    it("returns the middle of three numbers", () => {
+      expect(api.mid(8, 2, 4)).toBe(4);
+      expect(api.mid(-3.5, -3.4, -3.6)).toBe(-3.5);
+      expect(api.mid(6, 6, 8)).toBe(6);
+    });
+  });
+
+  describe("min", () => {
+    it("returns the minimum of two numbers", () => {
+      expect(api.min(40, 20)).toBe(20);
+      expect(api.min(2.7, -3.5)).toBe(-3.5);
+      expect(api.min(8, 8)).toBe(8);
+      expect(api.min(5)).toBe(0);
+      expect(api.min(-5)).toBe(-5);
+    });
+  });
+
   describe("memset", () => {
     it("writes a byte value to every address in a region of memory", () => {
       api.memset(0x6000, 0x77, 0x2000);
