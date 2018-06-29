@@ -1,26 +1,89 @@
-const { parse, render } = require("../emulator");
+const { createMiddleware, runWorker } = require("signalbox");
 
-const { createMiddleware } = require("signalbox");
+const { parse, render } = require("../emulator");
+const Screen = require("../emulator/screen").default;
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
-let canvas;
-let emulatorPath;
-let emulator;
-let raf;
-let running = true;
-let memory = new Uint8Array(0x8000);
-
-memory[0x7000] = 9; // one yellow pixel halfway down the screen
+let worker;
+let screen;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
   [after(actions.START_COMPOSER)](store, action) {
-    emulatorPath = document.querySelector('#emulator').textContent.trim();
-    emulator = new Worker(emulatorPath);
-    canvas = document.querySelector('canvas');
+    screen = new Screen(document.querySelector("canvas"));
+  },
+
+  [after(actions.CHANGE_CODE)](store, action) {
+    // delay here or something?
+    // only wanna run the emulator at most like once per second
+    const code = select("composer").from(store).code();
+    store.dispatch(actions.startEmulator(code));
+  },
+
+  [before(actions.START_EMULATOR)](store, action) {
+    const running = select("emulator").from(store).running();
+    if (running) {
+      store.dispatch(actions.stopEmulator());
+    }
+    console.log('eee');
+  },
+
+  [after(actions.START_EMULATOR)](store, action) {
+    const code = select("composer").from(store).code();
+
+    const path = document.querySelector('#emulator').textContent.trim();
+
+    worker = runWorker("emulator", path, action, {
+      [actions.SYNTAX_ERROR](dispatch, syntaxError) {
+        store.dispatch(syntaxError);
+      },
+
+      [actions.TICK_EMULATOR](dispatch, tickEmulator) {
+        console.log(tickEmulator);
+        screen.update(tickEmulator.memory);
+      },
+
+      [actions.STOP_EMULATOR](dispatch, stopEmulator) {
+        store.dispatch(stopEmulator);
+      }
+    });
+
+    screen.start();
+  },
+
+  [after(actions.SYNTAX_ERROR)](store, action) {
+    console.log('stopping (syntax)!');
+    worker.terminate();
+    screen.stop();
+  },
+
+  [after(actions.STOP_EMULATOR)](store, action) {
+    console.log('stopping!');
+    worker.terminate();
+    screen.stop();
+  }
+}));
+
+/*
+    const emulator = new Worker(emulatorPath);
+    const canvas = document.querySelector('canvas');
+
+    let running = true;
+    let memory = new Uint8Array(0x8000);
+    memory[0x7000] = 9; // one yellow pixel halfway down the screen
 
     emulator.onmessage = ({ data }) => {
       switch (data.type) {
+        case actions.TICK_EMULATOR:
+          console.log(data);
+          break;
+
+        case actions.STOP_EMULATOR:
+          console.log('terminate!');
+          store.dispatch(data);
+          emulator.terminate();
+          break;
+
         // receive a memory update from the emulator
         case 'MEMORY':
           Object.keys(data.changes).forEach(addr => {
@@ -29,19 +92,12 @@ export const middleware = createMiddleware((cancel, before, after) => ({
           });
           break;
 
-        // the emulator is done!
-        case 'CODE_FINISHED':
-          running = false;
-          break;
       }
     }
 
-    emulator.postMessage({
-      type: 'INITIALIZE',
-      memory,
-    });
+    worker.postMessage(action);
 
-    raf = () => {
+    const raf = () => {
       render(memory, canvas);
       if (running) {
         requestAnimationFrame(raf);
@@ -49,20 +105,9 @@ export const middleware = createMiddleware((cancel, before, after) => ({
         console.log('stopping');
       }
     };
-  },
 
-  [after(actions.CHANGE_CODE)](store, action) {
-    // delay here or something?
-    // only wanna run the emulator at most like once per second
-    const state = store.getState();
-    const code = select("composer").from(state).code();
-    store.dispatch(actions.startEmulator(code));
-  },
 
-  [after(actions.START_EMULATOR)](store, action) {
-    const state = store.getState();
-    const code = select("composer").from(state).code();
-
+  /*
     let ast;
 
     try {
@@ -79,11 +124,10 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     running = true
     requestAnimationFrame(raf);
     emulator.postMessage({
-      type: 'RUN_CODE',
+      type: 'START_EMULATOR',
       code: action.code,
     });
-  }
-}));
+    */
 
 export default middleware;
 
