@@ -9,6 +9,20 @@ describe("api", () => {
     api = Api(memory);
   });
 
+  describe("cos", () => {
+    it("calculates the cosine of an angle", () => {
+      expect(api.cos(0)).toBeCloseTo(1);
+      expect(api.cos(0.125)).toBeCloseTo(0.7071);
+      expect(api.cos(0.25)).toBeCloseTo(0);
+      expect(api.cos(0.375)).toBeCloseTo(-0.7071);
+      expect(api.cos(0.5)).toBeCloseTo(-1);
+      expect(api.cos(0.625)).toBeCloseTo(-0.7071);
+      expect(api.cos(0.75)).toBeCloseTo(0);
+      expect(api.cos(0.875)).toBeCloseTo(0.7071);
+      expect(api.cos(1)).toBeCloseTo(1);
+    });
+  });
+
   describe("memset", () => {
     it("writes a byte value to every address in a region of memory", () => {
       api.memset(0x6000, 0x77, 0x2000);

@@ -1,4 +1,10 @@
+const π = Math.PI;
+
 module.exports = memory => ({
+  cos(angle) {
+    return Math.cos((angle * 360) * (π / 180))
+  },
+
   memset(destaddr, val, len) {
     memory.fill(val, destaddr, destaddr + len);
   },
