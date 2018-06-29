@@ -11,6 +11,7 @@ const options = {
 export default function compile(ast) {
   const lines = escodegen.generate(ast, options).split("\n");
 
+  console.log(lines.join("\n"));
   lines.shift();
   lines.pop();
 

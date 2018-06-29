@@ -12,6 +12,7 @@
     "redux-thunk": "^2.3.0",
     "safer-eval": "^1.2.3",
     "signalbox": "file:./app/signalbox",
+    "emulator": "file:./app/emulator",
     "underscore": "^1.9.1"
   },
   "devDependencies": {
