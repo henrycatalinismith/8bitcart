@@ -15,10 +15,14 @@ export default function compile(ast) {
   lines.pop();
 
   const code = [
-    "(function() {",
+    "(async function() {",
+    //"const c = async function() {",
     lines.join("\n"),
+    //"};",
+    //"await c();",
     "}())",
-  ].join("\n");
+  ].join("\n").replace(/ flip\(\);/g, ' await flip();console.log("flipped!!", peek(0x5f40));').replace(/\(function/g, 'await (async function');
+  console.log(code);
 
   return code;
 }

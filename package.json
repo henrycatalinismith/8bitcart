@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "3.5",
+    "babel-polyfill": "^6.26.0",
     "codemirror": "^5.39.0",
     "emulator": "file:./app/emulator",
     "escodegen": "^1.10.0",

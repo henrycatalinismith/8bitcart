@@ -1,3 +1,4 @@
+require("babel-polyfill");
 const lua2js = require("lua2js");
 const saferEval = require("safer-eval");
 
@@ -9,6 +10,17 @@ export default function run(code, memory) {
     ...api(memory),
   };
 
-  saferEval(code, evalContext)
+  delete global['__core-js_shared__'];
+
+  const p = saferEval(code, evalContext)
+  console.log(p);
+  p.then(() => {
+    console.log('p then');
+  });
+
+  return p;
+  //return new Promise(resolve => {
+    //setTimeout(() => resolve(), 2000);
+  //});
 }
 
