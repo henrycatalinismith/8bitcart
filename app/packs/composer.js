@@ -1,5 +1,9 @@
-const { createApp } = require("signalbox");
+const React = require("react");
+const ReactDOM = require("react-dom");
+const { Provider } = require("react-redux");
 
+const { createApp } = require("signalbox");
+const Composer = require("../containers/Composer").default;
 const actions = require("../actions").default;
 const middlewares = require("../middlewares").default;
 const selectors = require("../reducers/selectors").default;
@@ -22,6 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const store = createStore(initialState);
   const app = createApp(store, actions, middlewares, selectors, thunks);
+
+  const root = document.createElement("div");
+  root.id = "Composer";
+  document.body.appendChild(root);
+  ReactDOM.render(<Provider store={store}><Composer /></Provider>, root);
 
   app.dispatch.startComposer();
 });
