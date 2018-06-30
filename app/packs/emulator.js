@@ -27,10 +27,8 @@ createWorker("emulator", {
     this.tick = () => dispatch(actions.tickEmulator(this.memory.slice(0x6000)));
 
     this.tick();
-    console.log('running');
     this.interval = setInterval(this.tick, 16);
     run(this.code, this.memory).then(() => {
-      console.log('after!!!');
       this.tick();
       dispatch(actions.stopEmulator());
     });;

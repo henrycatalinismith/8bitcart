@@ -13,15 +13,14 @@ export default function compile(ast) {
 
   lines.shift();
   lines.pop();
+  lines.unshift(["(async function() {"]);
+  lines.push(["}());"]);
 
-  const code = [
-    "(async function() {",
-    //"const c = async function() {",
-    lines.join("\n"),
-    //"};",
-    //"await c();",
-    "}())",
-  ].join("\n").replace(/ flip\(\);/g, ' await flip();console.log("flipped!!", peek(0x5f40));').replace(/\(function/g, 'await (async function');
+  const code = lines
+    .join("\n")
+    .replace(/ flip\(\);/g, ' await flip();')
+    .replace(/\(function/g, 'await (async function');
+
   console.log(code);
 
   return code;
