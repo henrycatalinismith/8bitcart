@@ -5591,6 +5591,10 @@ rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-codemirror2@^5.0.4:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/react-codemirror2/-/react-codemirror2-5.0.4.tgz#d44a2d7a63a96509ba65db9b771bd61a781b8a0d"
+
 react-dom@^16.4.1:
   version "16.4.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.4.1.tgz#7f8b0223b3a5fbe205116c56deb85de32685dad6"

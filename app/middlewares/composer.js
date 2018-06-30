@@ -12,32 +12,14 @@ const markers = [];
 const lineWidgets = [];
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [after(actions.START_COMPOSER)](store, action) {
-    const textarea = document.querySelector('textarea');
-
-    cm = CodeMirror.fromTextArea(textarea, {
-      lineNumbers: true,
-      mode: "lua",
-      autofocus: true,
-      indentWithTabs: false,
-      indentSize: 2,
-      indentUnit: 1,
-      smartIndent: true,
-      cursorBlinkRate: 500,
-    });
-
-    cm.on("keyup", () => {
-      store.dispatch(actions.changeCode(cm.getValue()));
-    })
-  },
-
   [cancel(actions.CHANGE_CODE)](store, action) {
     return action.composer.code === select("composer").from(store).code();
   },
 
+  /*
   [after(actions.CHANGE_CODE)](store, action) {
-    markers.forEach(marker => marker.clear());
-    lineWidgets.forEach(l => cm.removeLineWidget(l));
+    //markers.forEach(marker => marker.clear());
+    //lineWidgets.forEach(l => cm.removeLineWidget(l));
   },
 
   [after(actions.SYNTAX_ERROR)](store, action) {
@@ -69,6 +51,7 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       lineWidgets.push(cm.addLineWidget(line - 1, lineWidget));
     }, 100);
   }
+  */
 }));
 
 export default middleware;

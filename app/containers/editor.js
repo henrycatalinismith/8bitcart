@@ -1,36 +1,58 @@
 const React = require("react");
 const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
+const { Controlled: CodeMirror } = require("react-codemirror2");
 
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
-const Textarea = require("../components/textarea").default;
 
 export class Editor extends React.PureComponent {
-  static mapStateToProps = state => ({});
+  static mapStateToProps = state => ({
+    code: select("composer").from(state).code(),
+  });
 
   static mapDispatchToProps = dispatch => ({
-    mountTextarea: textarea => dispatch(actions.mountTextarea(textarea)),
+    changeCode: code => dispatch(actions.changeCode(code)),
   });
 
   static propTypes = {
-    mountTextarea: PropTypes.func,
+    changeCode: PropTypes.func,
   };
 
-  onTextareaMount = textarea => {
-    this.props.mountTextarea(textarea);
+  static codeMirrorOptions = {
+    autofocus: false,
+    cursorBlinkRate: 500,
+    indentUnit: 2,
+    indentWithTabs: false,
+    lineNumbers: true,
+    mode: "lua",
+    smartIndent: true,
   };
+
+  constructor(...props) {
+    super(...props);
+    this.state = {
+      code: props.code,
+    };
+  }
 
   render() {
-    return <Textarea onMount={this.onTextareaMount} />;
+    const props = {
+      options: Editor.codeMirrorOptions,
+      value: this.state.code,
+
+      onBeforeChange: (editor, data, value) => {
+        this.setState({ code: value });
+      },
+
+      onChange: (editor, data, value) => {
+        this.props.changeCode(value);
+      }
+    };
+
+    return <CodeMirror {...props} />;
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    mountTextarea: textarea => dispatch(actions.mountTextarea(textarea)),
-  };
-};
 
 export default connect(
   Editor.mapStateToProps,
