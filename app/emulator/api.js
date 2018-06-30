@@ -51,6 +51,10 @@ module.exports = memory => ({
     memory.fill(0, 0x6000, 0x7fff);
   },
 
+  flip: async () => {
+    return new Promise(r => setTimeout(r, 16));
+  },
+
   //lshr(num, bits) {
   //},
 

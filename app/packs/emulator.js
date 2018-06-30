@@ -1,3 +1,5 @@
+require("babel-polyfill");
+
 const saferEval = require("safer-eval");
 const { throttle } = require("underscore");
 const { createWorker } = require("signalbox");
@@ -25,11 +27,14 @@ createWorker("emulator", {
     this.tick = () => dispatch(actions.tickEmulator(this.memory.slice(0x6000)));
 
     this.tick();
-    run(this.code, this.memory);
-    this.tick();
+    console.log('running');
     this.interval = setInterval(this.tick, 16);
+    run(this.code, this.memory).then(() => {
+      console.log('after!!!');
+      this.tick();
+      dispatch(actions.stopEmulator());
+    });;
 
-    dispatch(actions.stopEmulator());
   },
 });
 
