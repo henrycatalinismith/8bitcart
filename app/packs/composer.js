@@ -17,6 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     emulator: {
       running: false,
+      width: window.innerWidth,
+      height: 100,
     },
     viewport: {
       width: window.innerWidth,

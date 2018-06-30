@@ -3,8 +3,7 @@ const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
 const actions = require("../actions").default;
-const select = require("../reducers").selectors;
-const Viewport = require("../components/viewport").default;
+const select = require("../reducers/selectors").default;
 
 const Editor = require("./editor").default;
 const Emulator = require("./emulator").default;

@@ -3,7 +3,7 @@ const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 
 const actions = require("../actions").default;
-const select = require("../reducers").selectors;
+const select = require("../reducers/selectors").default;
 const Textarea = require("../components/textarea").default;
 
 export class Editor extends React.PureComponent {

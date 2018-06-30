@@ -2,8 +2,7 @@ const { createReducer } = require("signalbox");
 
 const actions = require("../actions").default;
 
-const initialState = {
-};
+const initialState = {};
 
 export const reducer = createReducer(initialState, {
   [actions.START_EMULATOR](emulator, action) {
@@ -35,5 +34,7 @@ export const selectors = {
   running: emulator => emulator.running,
   started: emulator => emulator.started,
   stopped: emulator => emulator.stopped,
+  width: emulator => emulator.width,
+  height: emulator => emulator.height,
 };
 
