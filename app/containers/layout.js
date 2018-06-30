@@ -7,17 +7,43 @@ const select = require("../reducers/selectors").default;
 
 const Composer = require("./composer").default;
 const Emulator = require("./emulator").default;
+const SplitPane = require("react-split-pane").default;
+
+console.log(SplitPane);
 
 export class Layout extends React.PureComponent {
-  static mapStateToProps = state => ({});
-  static mapDispatchToProps = dispatch => ({});
-  static propTypes = {};
+  static mapStateToProps = state => ({
+    composerHeight: select("composer").from(state).height(),
+    emulatorHeight: select("emulator").from(state).height(),
+  });
+
+  static mapDispatchToProps = dispatch => ({
+    resizeEmulator: height => dispatch(actions.resizeEmulator(height)),
+  });
+
+  static propTypes = {
+    composerHeight: PropTypes.number,
+    emulatorHeight: PropTypes.number,
+  };
+
+  onChange = size => {
+    this.props.resizeEmulator(size);
+  }
 
   render() {
-    return [
-      <Emulator key="emulator" />,
-      <Composer key="composer" />,
-    ];
+    const { composerHeight, emulatorHeight } = this.props;
+    const totalHeight = composerHeight + emulatorHeight;
+    const percent = emulatorHeight / totalHeight * 100;
+
+    return (
+      <SplitPane
+        split="horizontal"
+        defaultSize={`${percent}%`}
+        onChange={this.onChange}>
+        <Emulator key="emulator" />
+        <Composer key="composer" />
+      </SplitPane>
+    );
   }
 }
 

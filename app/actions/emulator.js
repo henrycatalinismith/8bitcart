@@ -4,6 +4,7 @@ export default createActions([
 
   "START_EMULATOR",
   "STOP_EMULATOR",
+  "RESIZE_EMULATOR",
   "SYNTAX_ERROR",
   "TICK_EMULATOR",
 
@@ -28,6 +29,11 @@ export default createActions([
   tickEmulator: memory => ({
     type: types.TICK_EMULATOR,
     memory,
+  }),
+
+  resizeEmulator: height => ({
+    type: types.RESIZE_EMULATOR,
+    emulator: { height },
   }),
 
 }));

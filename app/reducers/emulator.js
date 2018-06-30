@@ -28,6 +28,13 @@ export const reducer = createReducer(initialState, {
       stopped: new Date,
     };
   },
+
+  [actions.RESIZE_EMULATOR](emulator, action) {
+    return {
+      ...emulator,
+      height: action.emulator.height,
+    };
+  },
 });
 
 export const selectors = {
