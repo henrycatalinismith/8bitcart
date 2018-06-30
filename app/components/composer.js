@@ -1,7 +1,7 @@
 const React = require("react");
 const PropTypes = require("prop-types");
 
-export default class Stage extends React.Component {
+export default class Editor extends React.Component {
   static propTypes = {
     children: PropTypes.object,
     width: PropTypes.number,
@@ -16,7 +16,7 @@ export default class Stage extends React.Component {
     };
 
     return (
-      <div className="stage" style={style}>
+      <div className="editor" style={style}>
         {children}
       </div>
     );
