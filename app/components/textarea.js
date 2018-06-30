@@ -19,6 +19,10 @@ export default class Textarea extends React.Component {
   }
 
   render() {
-    return <textarea className="textarea" ref={this.setTextarea} />;
+    return (
+      <div className="textarea">
+        <textarea ref={this.setTextarea} />
+      </div>
+    );
   }
 }
