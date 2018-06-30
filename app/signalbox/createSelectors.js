@@ -10,7 +10,8 @@ exports.createSelectors = (selectors, options = defaultOptions) => {
       from(store) {
         return new Proxy({}, {
           get(target, name) {
-            const stateParam = options.stateAccessor(store.getState(), entity);
+            const state = store.getState ? store.getState() : store;
+            const stateParam = options.stateAccessor(state, entity);
             return selectors[entity][name].bind(null, stateParam);
           }
         });
