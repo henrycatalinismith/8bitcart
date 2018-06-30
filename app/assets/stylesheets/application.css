@@ -12,5 +12,6 @@
  *
  *= require codemirror
  *= require_tree .
+ *= require_tree ../../stylesheets
  *= require_self
  */

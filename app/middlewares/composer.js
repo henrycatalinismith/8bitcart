@@ -13,7 +13,7 @@ const lineWidgets = [];
 
 export const middleware = createMiddleware((cancel, before, after) => ({
   [after(actions.START_COMPOSER)](store, action) {
-    const textarea = document.querySelector('.Cart__textarea');
+    const textarea = document.querySelector('.textarea');
 
     cm = CodeMirror.fromTextArea(textarea, {
       lineNumbers: true,

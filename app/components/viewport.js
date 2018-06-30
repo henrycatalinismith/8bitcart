@@ -8,7 +8,7 @@ export default class Viewport extends React.PureComponent {
 
   render() {
     return (
-      <div className="Viewport">
+      <div className="viewport">
         {this.props.children}
       </div>
     );
