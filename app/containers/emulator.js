@@ -5,7 +5,7 @@ const { connect } = require("react-redux");
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
-const Stage = require("../components/stage").default;
+const Wrapper = require("../components/emulator").default;
 const Canvas = require("../components/canvas").default;
 
 export class Emulator extends React.PureComponent {
@@ -26,9 +26,9 @@ export class Emulator extends React.PureComponent {
   render() {
     const { width, height } = this.props;
     return (
-      <Stage width={width} height={height}>
-        <Canvas width={100} height={100} />
-      </Stage>
+      <Wrapper width={width} height={height}>
+        <Canvas width={height} height={height} />
+      </Wrapper>
     );
   }
 }

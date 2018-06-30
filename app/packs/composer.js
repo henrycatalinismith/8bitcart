@@ -3,7 +3,7 @@ const ReactDOM = require("react-dom");
 const { Provider } = require("react-redux");
 
 const { createApp } = require("signalbox");
-const Composer = require("../containers/composer").default;
+const Layout = require("../containers/layout").default;
 const actions = require("../actions").default;
 const middlewares = require("../middlewares").default;
 const selectors = require("../reducers/selectors").default;
@@ -13,12 +13,14 @@ const thunks = require("../thunks").default;
 document.addEventListener('DOMContentLoaded', () => {
   const initialState = {
     composer: {
-      lastUpdate: new Date,
+      started: new Date,
+      width: window.innerWidth,
+      height: window.innerHeight - 300,
     },
     emulator: {
       running: false,
       width: window.innerWidth,
-      height: 100,
+      height: 300,
     },
     viewport: {
       width: window.innerWidth,
@@ -32,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const root = document.createElement("div");
   root.className = "composer";
   document.body.appendChild(root);
-  ReactDOM.render(<Provider store={store}><Composer /></Provider>, root);
+  ReactDOM.render(<Provider store={store}><Layout /></Provider>, root);
 
   app.dispatch.startComposer();
 });

@@ -1,23 +1,61 @@
 const React = require("react");
 const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
+const { Controlled: CodeMirror } = require("react-codemirror2");
 
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
-
-const Editor = require("./editor").default;
-const Emulator = require("./emulator").default;
+const Wrapper = require("../components/composer").default;
 
 export class Composer extends React.PureComponent {
-  static mapStateToProps = state => ({});
-  static mapDispatchToProps = dispatch => ({});
-  static propTypes = {};
+  static mapStateToProps = state => ({
+    code: select("composer").from(state).code(),
+  });
+
+  static mapDispatchToProps = dispatch => ({
+    changeCode: code => dispatch(actions.changeCode(code)),
+  });
+
+  static propTypes = {
+    changeCode: PropTypes.func,
+  };
+
+  static codeMirrorOptions = {
+    autofocus: false,
+    cursorBlinkRate: 500,
+    indentUnit: 2,
+    indentWithTabs: false,
+    lineNumbers: true,
+    mode: "lua",
+    smartIndent: true,
+  };
+
+  constructor(...props) {
+    super(...props);
+    this.state = {
+      code: props.code,
+    };
+  }
 
   render() {
-    return [
-      <Emulator key="emulator" />,
-      <Editor key="editor" />,
-    ];
+    const props = {
+      options: Composer.codeMirrorOptions,
+      value: this.state.code,
+
+      onBeforeChange: (editor, data, value) => {
+        this.setState({ code: value });
+      },
+
+      onChange: (editor, data, value) => {
+        this.props.changeCode(value);
+      }
+    };
+
+    return (
+      <Wrapper>
+        <CodeMirror {...props} />
+      </Wrapper>
+    );
   }
 }
 
