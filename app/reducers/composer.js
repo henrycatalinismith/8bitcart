@@ -13,9 +13,18 @@ export const reducer = createReducer(initialState, {
       code: action.composer.code,
     };
   },
+
+  [actions.RESIZE_EMULATOR](composer, action) {
+    return {
+      ...composer,
+      height: action.composer.height,
+    };
+  },
 });
 
 export const selectors = {
   code: composer => composer.code,
+  width: composer => composer.width,
+  height: composer => composer.height,
 };
 

@@ -18,5 +18,7 @@ export const reducer = createReducer(initialState, {
 
 export const selectors = {
   dimensions: viewport => viewport,
+  width: viewport => viewport.width,
+  height: viewport => viewport.height,
 };
 

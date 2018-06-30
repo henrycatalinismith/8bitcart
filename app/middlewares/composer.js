@@ -16,6 +16,13 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     return action.composer.code === select("composer").from(store).code();
   },
 
+  [before(actions.RESIZE_EMULATOR)](store, action) {
+    const viewportHeight = select("viewport").from(store).height();
+    action.composer = {
+      height: viewportHeight - action.emulator.height,
+    };
+  },
+
   /*
   [after(actions.CHANGE_CODE)](store, action) {
     //markers.forEach(marker => marker.clear());
