@@ -28,6 +28,7 @@ export class Composer extends React.PureComponent {
     lineNumbers: true,
     mode: "lua",
     smartIndent: true,
+    viewportMargin: Infinity,
   };
 
   constructor(...props) {
