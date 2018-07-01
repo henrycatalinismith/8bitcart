@@ -1,0 +1,16 @@
+.header {
+  background-color: #444;
+  height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.header svg {
+  height: 16px;
+  padding: 0 0 0 8px;
+}
+
+.header svg path {
+  //stroke: white;
+  fill: #ee74a7;
+}

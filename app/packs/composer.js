@@ -11,12 +11,16 @@ const createStore = require("../reducers").default;
 const thunks = require("../thunks").default;
 
 document.addEventListener('DOMContentLoaded', () => {
+  const viewportHeight = window.innerHeight;
+  const headerHeight = 32;
+  const availableHeight = viewportHeight - headerHeight;
+
   const initialState = {
     editor: {
       started: new Date,
       updated: undefined,
       width: window.innerWidth,
-      height: window.innerHeight / 2,
+      height: availableHeight / 2,
     },
     emulator: {
       path: document.querySelector('#emulator').textContent.trim(),
@@ -24,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
       started: undefined,
       stopped: undefined,
       width: window.innerWidth,
-      height: window.innerHeight / 2,
+      height: availableHeight / 2,
     },
     viewport: {
       width: window.innerWidth,
