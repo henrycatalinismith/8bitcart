@@ -38,6 +38,7 @@ export const reducer = createReducer(initialState, {
 });
 
 export const selectors = {
+  path: emulator => emulator.path,
   running: emulator => emulator.running,
   started: emulator => emulator.started,
   stopped: emulator => emulator.stopped,
