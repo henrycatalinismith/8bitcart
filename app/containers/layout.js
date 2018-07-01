@@ -5,6 +5,7 @@ const { connect } = require("react-redux");
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
+const Header = require("../components/header").default;
 const Pane = require("../components/pane").default;
 const Editor = require("./editor").default;
 const Emulator = require("./emulator").default;
@@ -40,6 +41,7 @@ export class Layout extends React.PureComponent {
     const percent = emulatorHeight / totalHeight * 100;
 
     return [
+      <Header />,
       <Pane key="emulator" width={editorWidth} height={editorHeight}>
         <Emulator />
       </Pane>,
