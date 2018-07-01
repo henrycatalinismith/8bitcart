@@ -1,5 +1,5 @@
 require("codemirror/mode/lua/lua");
-require("codemirror/addon/edit/closebrackets");
+//require("codemirror/addon/edit/closebrackets");
 
 const CodeMirror = require("codemirror");
 
@@ -7,21 +7,21 @@ const { createMiddleware } = require("signalbox");
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
-let cm;
-const markers = [];
-const lineWidgets = [];
+//let cm;
+//const markers = [];
+//const lineWidgets = [];
 
 export const middleware = createMiddleware((cancel, before, after) => ({
   [cancel(actions.CHANGE_CODE)](store, action) {
-    return action.composer.code === select("composer").from(store).code();
+    return action.editor.code === select("editor").from(store).code();
   },
 
-  [before(actions.RESIZE_EMULATOR)](store, action) {
-    const viewportHeight = select("viewport").from(store).height();
-    action.composer = {
-      height: viewportHeight - action.emulator.height,
-    };
-  },
+  //[before(actions.RESIZE_EMULATOR)](store, action) {
+    //const viewportHeight = select("viewport").from(store).height();
+    //action.composer = {
+      //height: viewportHeight - action.emulator.height,
+    //};
+  //},
 
   /*
   [after(actions.CHANGE_CODE)](store, action) {

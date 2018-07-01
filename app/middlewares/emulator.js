@@ -8,12 +8,8 @@ let worker;
 let screen;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [after(actions.START_COMPOSER)](store, action) {
-    screen = new Screen(document.querySelector("canvas"));
-  },
-
   [after(actions.CHANGE_CODE)](store, action) {
-    const code = select("composer").from(store).code();
+    const code = select("editor").from(store).code();
     store.dispatch(actions.startEmulator(code));
   },
 
@@ -26,6 +22,9 @@ export const middleware = createMiddleware((cancel, before, after) => ({
 
   [after(actions.START_EMULATOR)](store, action) {
     const path = document.querySelector('#emulator').textContent.trim();
+    if (screen === undefined) {
+      screen = new Screen(document.querySelector("canvas"));
+    }
 
     worker = runWorker("emulator", path, action, {
       [actions.SYNTAX_ERROR](dispatch, syntaxError) {

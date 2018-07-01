@@ -1,11 +1,11 @@
 const { createSelectors } = require("signalbox");
 
-const composer = require("./composer");
+const editor = require("./editor");
 const emulator = require("./emulator");
 const viewport = require("./viewport");
 
 export const select = {
-  composer: composer.selectors,
+  editor: editor.selectors,
   emulator: emulator.selectors,
   viewport: viewport.selectors,
 };
