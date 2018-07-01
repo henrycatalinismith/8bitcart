@@ -16,14 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
       started: new Date,
       updated: undefined,
       width: window.innerWidth,
-      height: window.innerHeight - 300,
+      height: window.innerHeight / 2,
     },
     emulator: {
       running: false,
       started: undefined,
       stopped: undefined,
       width: window.innerWidth,
-      height: 300,
+      height: window.innerHeight / 2,
     },
     viewport: {
       width: window.innerWidth,
