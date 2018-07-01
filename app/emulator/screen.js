@@ -47,10 +47,7 @@ export default class Screen {
     this.px = this.canvas.width / 128;
     this.render = this.render.bind(this);
     this.canvas.addEventListener("resize", () => {
-      console.log('resize!!!');
-      console.log(this.px);
       this.px = this.canvas.width / 128;
-      console.log(this.px);
       this.render();
     });
   }
