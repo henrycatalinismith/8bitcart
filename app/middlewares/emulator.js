@@ -21,7 +21,8 @@ export const middleware = createMiddleware((cancel, before, after) => ({
   },
 
   [after(actions.START_EMULATOR)](store, action) {
-    const path = document.querySelector('#emulator').textContent.trim();
+    const path = select("emulator").from(store).path();
+
     if (screen === undefined) {
       screen = new Screen(document.querySelector("canvas"));
     }

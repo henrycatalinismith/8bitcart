@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
       height: window.innerHeight / 2,
     },
     emulator: {
+      path: document.querySelector('#emulator').textContent.trim(),
       running: false,
       started: undefined,
       stopped: undefined,
