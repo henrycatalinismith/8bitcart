@@ -5,15 +5,12 @@ const { connect } = require("react-redux");
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
-const Composer = require("./composer").default;
+const Editor = require("./editor").default;
 const Emulator = require("./emulator").default;
-const SplitPane = require("react-split-pane").default;
-
-console.log(SplitPane);
 
 export class Layout extends React.PureComponent {
   static mapStateToProps = state => ({
-    composerHeight: select("composer").from(state).height(),
+    editorHeight: select("editor").from(state).height(),
     emulatorHeight: select("emulator").from(state).height(),
   });
 
@@ -22,7 +19,7 @@ export class Layout extends React.PureComponent {
   });
 
   static propTypes = {
-    composerHeight: PropTypes.number,
+    editorHeight: PropTypes.number,
     emulatorHeight: PropTypes.number,
   };
 
@@ -31,19 +28,14 @@ export class Layout extends React.PureComponent {
   }
 
   render() {
-    const { composerHeight, emulatorHeight } = this.props;
-    const totalHeight = composerHeight + emulatorHeight;
+    const { editorHeight, emulatorHeight } = this.props;
+    const totalHeight = editorHeight + emulatorHeight;
     const percent = emulatorHeight / totalHeight * 100;
 
-    return (
-      <SplitPane
-        split="horizontal"
-        defaultSize={`${percent}%`}
-        onChange={this.onChange}>
-        <Emulator key="emulator" />
-        <Composer key="composer" />
-      </SplitPane>
-    );
+    return [
+      <Emulator key="emulator" />,
+      <Editor key="editor" />,
+    ];
   }
 }
 

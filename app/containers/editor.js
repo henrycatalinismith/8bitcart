@@ -5,11 +5,11 @@ const { Controlled: CodeMirror } = require("react-codemirror2");
 
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
-const Wrapper = require("../components/composer").default;
+const Wrapper = require("../components/editor").default;
 
-export class Composer extends React.PureComponent {
+export class Editor extends React.PureComponent {
   static mapStateToProps = state => ({
-    code: select("composer").from(state).code(),
+    code: select("editor").from(state).code(),
   });
 
   static mapDispatchToProps = dispatch => ({
@@ -40,7 +40,7 @@ export class Composer extends React.PureComponent {
 
   render() {
     const props = {
-      options: Composer.codeMirrorOptions,
+      options: Editor.codeMirrorOptions,
       value: this.state.code,
 
       onBeforeChange: (editor, data, value) => {
@@ -61,7 +61,7 @@ export class Composer extends React.PureComponent {
 }
 
 export default connect(
-  Composer.mapStateToProps,
-  Composer.mapDispatchToProps
-)(Composer);
+  Editor.mapStateToProps,
+  Editor.mapDispatchToProps
+)(Editor);
 

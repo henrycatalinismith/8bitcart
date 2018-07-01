@@ -12,7 +12,6 @@ export default class Canvas extends React.Component {
   };
 
   componentDidUpdate() {
-    //console.log(this.element);
     this.element.width = this.element.offsetWidth;
     this.element.height = this.element.offsetHeight;
     this.element.dispatchEvent(new Event("resize"));

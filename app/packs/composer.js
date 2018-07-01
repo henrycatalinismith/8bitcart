@@ -12,13 +12,16 @@ const thunks = require("../thunks").default;
 
 document.addEventListener('DOMContentLoaded', () => {
   const initialState = {
-    composer: {
+    editor: {
       started: new Date,
+      updated: undefined,
       width: window.innerWidth,
       height: window.innerHeight - 300,
     },
     emulator: {
       running: false,
+      started: undefined,
+      stopped: undefined,
       width: window.innerWidth,
       height: 300,
     },
@@ -37,5 +40,12 @@ document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(<Provider store={store}><Layout /></Provider>, root);
 
   app.dispatch.startComposer();
+
+  window.addEventListener("resize", () => {
+    app.dispatch.resizeViewport(
+      window.innerWidth,
+      window.innerHeight
+    );
+  });
 });
 
