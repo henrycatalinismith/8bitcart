@@ -5,11 +5,12 @@ const { Controlled: CodeMirror } = require("react-codemirror2");
 
 const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
-const Wrapper = require("../components/editor").default;
 
 export class Editor extends React.PureComponent {
   static mapStateToProps = state => ({
     code: select("editor").from(state).code(),
+    width: select("editor").from(state).width(),
+    height: select("editor").from(state).height(),
   });
 
   static mapDispatchToProps = dispatch => ({
@@ -18,6 +19,8 @@ export class Editor extends React.PureComponent {
 
   static propTypes = {
     changeCode: PropTypes.func,
+    width: PropTypes.number,
+    height: PropTypes.number,
   };
 
   static codeMirrorOptions = {
@@ -39,7 +42,10 @@ export class Editor extends React.PureComponent {
   }
 
   render() {
+    const { width, height } = this.props;
+
     const props = {
+      className: "editor",
       options: Editor.codeMirrorOptions,
       value: this.state.code,
 
@@ -52,11 +58,7 @@ export class Editor extends React.PureComponent {
       }
     };
 
-    return (
-      <Wrapper>
-        <CodeMirror {...props} />
-      </Wrapper>
-    );
+    return <CodeMirror {...props} />;
   }
 }
 

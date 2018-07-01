@@ -39,8 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(root);
   ReactDOM.render(<Provider store={store}><Layout /></Provider>, root);
 
-  app.dispatch.startComposer();
-
   window.addEventListener("resize", () => {
     app.dispatch.resizeViewport(
       window.innerWidth,
