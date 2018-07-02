@@ -6,11 +6,18 @@ const select = require("../reducers/selectors").default;
 
 let worker;
 let screen;
+let timeout;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
   [after(actions.CHANGE_CODE)](store, action) {
     const code = select("editor").from(store).code();
-    store.dispatch(actions.startEmulator(code));
+    if (timeout) {
+      clearTimeout(timeout);
+    }
+
+    timeout = setTimeout(() => {
+      store.dispatch(actions.startEmulator(code));
+    }, 2000);
   },
 
   [before(actions.START_EMULATOR)](store, action) {
