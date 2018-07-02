@@ -37,7 +37,7 @@ export class Editor extends React.PureComponent {
     indentWithTabs: false,
     lineNumbers: true,
     mode: "lua",
-    smartIndent: true,
+    //smartIndent: true,
     viewportMargin: Infinity,
   };
 
@@ -105,15 +105,22 @@ export class Editor extends React.PureComponent {
       return m;
     }
 
+    this.editor.scrollTo(from)
     this.markers.push(this.editor.markText(from, to, options));
     this.gutterMarkers.push(this.editor.setGutterMarker(line - 1, "syntaxErrors", face("😅")));
     this.lineWidgets.push(this.editor.addLineWidget(line - 1, text("&nbsp;".repeat(column-1) + "oops")));
     this.lineWidgets.push(this.editor.addLineWidget(line - 2, text("")));
+    setTimeout(() => {
+      this.editor.setCursor(from)
+    }, 200);
 
     console.log('markerr');
     this.tick = 0;
     clearInterval(this.interval);
     this.interval = setInterval(() => {
+      if (!this.props.syntaxError) {
+        return;
+      }
       const even = this.tick % 2 === 0;
       const m = face(even ? "🤨" : "😅");
       //this.editor.clearGutter("syntaxErrors");
