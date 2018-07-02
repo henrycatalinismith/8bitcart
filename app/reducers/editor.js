@@ -8,6 +8,18 @@ export const reducer = createReducer({}, {
       ...editor,
       code: action.editor.code,
       updated: new Date,
+      syntaxErrorLine: undefined,
+      syntaxErrorColumn: undefined,
+      syntaxErrorMessage: undefined,
+    };
+  },
+
+  [actions.SYNTAX_ERROR](editor, action) {
+    return {
+      ...editor,
+      syntaxErrorLine: action.line,
+      syntaxErrorColumn: action.column,
+      syntaxErrorMessage: action.message,
     };
   },
 
@@ -25,5 +37,10 @@ export const selectors = {
   code: editor => editor.code,
   width: editor => editor.width,
   height: editor => editor.height,
+  syntaxError: editor => editor.syntaxErrorMessage ? ({
+    line: editor.syntaxErrorLine,
+    column: editor.syntaxErrorColumn,
+    message: editor.syntaxErrorMessage,
+  }) : undefined,
 };
 

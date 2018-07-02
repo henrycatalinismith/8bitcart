@@ -8,3 +8,13 @@
   width: 100%;
   font-size: 16px;
 }
+
+@keyframes pop {
+  from { height: 0px; }
+  to { height: 32px; }
+}
+
+
+.annotation {
+  animation: pop 0.2s normal forwards ease-in-out;
+}

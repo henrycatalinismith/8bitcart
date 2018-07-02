@@ -7,6 +7,7 @@ export default createActions([
   "RESIZE_EMULATOR",
   "SYNTAX_ERROR",
   "TICK_EMULATOR",
+  "PARSE_CODE",
 
 ], types => ({
 
@@ -24,6 +25,11 @@ export default createActions([
     line,
     column,
     message,
+  }),
+
+  parseCode: code => ({
+    type: types.PARSE_CODE,
+    code,
   }),
 
   tickEmulator: memory => ({
