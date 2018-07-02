@@ -110,9 +110,9 @@ export class Editor extends React.PureComponent {
     this.gutterMarkers.push(this.editor.setGutterMarker(line - 1, "syntaxErrors", face("😅")));
     this.lineWidgets.push(this.editor.addLineWidget(line - 1, text("&nbsp;".repeat(column-1) + "oops")));
     this.lineWidgets.push(this.editor.addLineWidget(line - 2, text("")));
-    setTimeout(() => {
-      this.editor.setCursor(from)
-    }, 200);
+    //setTimeout(() => {
+      //this.editor.setCursor(to)
+    //}, 200);
 
     console.log('markerr');
     this.tick = 0;
