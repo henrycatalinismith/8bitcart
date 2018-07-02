@@ -9,17 +9,26 @@ const compile = require("../emulator/compiler").default;
 const run = require("../emulator/runner").default;
 const actions = require("../actions").default;
 
+const tryParse = (dispatch, code) => {
+  try {
+    return parse(code);
+  } catch (e) {
+    return dispatch(actions.syntaxError(
+      e.line,
+      e.column,
+      e.message,
+    ));
+  }
+}
+
 createWorker("emulator", {
+  [actions.PARSE_CODE](dispatch, action) {
+    tryParse(dispatch, action.code);
+    dispatch(actions.stopEmulator());
+  },
+
   [actions.START_EMULATOR](dispatch, action) {
-    try {
-      this.ast = parse(action.code);
-    } catch (e) {
-      return dispatch(actions.syntaxError(
-        e.line,
-        e.column,
-        e.message,
-      ));
-    }
+    this.ast = tryParse(dispatch, action.code);
 
     this.code = compile(this.ast);
     this.memory = new Uint8Array(0x8000);

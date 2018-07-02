@@ -6,16 +6,24 @@ const select = require("../reducers/selectors").default;
 
 let worker;
 let screen;
-let timeout;
+let runTimeout;
+let parseTimeout;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
   [after(actions.CHANGE_CODE)](store, action) {
     const code = select("editor").from(store).code();
-    if (timeout) {
-      clearTimeout(timeout);
+    if (parseTimeout) {
+      clearTimeout(parseTimeout);
+    }
+    if (runTimeout) {
+      clearTimeout(runTimeout);
     }
 
-    timeout = setTimeout(() => {
+    runTimeout = setTimeout(() => {
+      store.dispatch(actions.parseCode(code));
+    }, 200);
+
+    runTimeout = setTimeout(() => {
       store.dispatch(actions.startEmulator(code));
     }, 2000);
   },
@@ -25,6 +33,21 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     if (running) {
       store.dispatch(actions.stopEmulator());
     }
+  },
+
+  [after(actions.PARSE_CODE)](store, action) {
+    const path = select("emulator").from(store).path();
+
+    console.log("parse code");
+    worker = runWorker("emulator", path, action, {
+      [actions.SYNTAX_ERROR](dispatch, syntaxError) {
+        store.dispatch(syntaxError);
+      },
+
+      [actions.STOP_EMULATOR](dispatch, stopEmulator) {
+        store.dispatch(stopEmulator);
+      }
+    });
   },
 
   [after(actions.START_EMULATOR)](store, action) {
@@ -52,13 +75,19 @@ export const middleware = createMiddleware((cancel, before, after) => ({
   },
 
   [after(actions.SYNTAX_ERROR)](store, action) {
+    store.dispatch(actions.stopEmulator());
+    clearTimeout(runTimeout);
     worker.terminate();
-    screen.stop();
+    if (screen) {
+      screen.stop();
+    }
   },
 
   [after(actions.STOP_EMULATOR)](store, action) {
     worker.terminate();
-    screen.stop();
+    if (screen) {
+      screen.stop();
+    }
   }
 }));
 

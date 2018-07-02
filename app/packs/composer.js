@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
       updated: undefined,
       width: window.innerWidth,
       height: availableHeight / 2,
+      syntaxErrorLine: undefined,
+      syntaxErrorColumn: undefined,
+      syntaxErrorMessage: undefined,
     },
     emulator: {
       path: document.querySelector('#emulator').textContent.trim(),
