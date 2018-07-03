@@ -6,6 +6,7 @@ const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
 const Header = require("../components/header").default;
+const Footer = require("../components/footer").default;
 const Pane = require("../components/pane").default;
 const Editor = require("./editor").default;
 const Emulator = require("./emulator").default;
@@ -41,13 +42,14 @@ export class Layout extends React.PureComponent {
     const percent = emulatorHeight / totalHeight * 100;
 
     return [
-      <Header />,
+      <Header key="header"/>,
       <Pane key="emulator" width={editorWidth} height={editorHeight}>
         <Emulator />
       </Pane>,
       <Pane key="editor" width={emulatorWidth} height={emulatorHeight}>
         <Editor />
-      </Pane>
+      </Pane>,
+      <Footer key="footer"/>,
     ];
   }
 }
