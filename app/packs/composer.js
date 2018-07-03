@@ -13,7 +13,8 @@ const thunks = require("../thunks").default;
 document.addEventListener('DOMContentLoaded', () => {
   const viewportHeight = window.innerHeight;
   const headerHeight = 32;
-  const availableHeight = viewportHeight - headerHeight;
+  const footerHeight = 32;
+  const availableHeight = viewportHeight - headerHeight - footerHeight;
 
   const initialState = {
     editor: {
