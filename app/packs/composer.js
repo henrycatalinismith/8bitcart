@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const footerHeight = 32;
 
   if (viewportWidth < viewportHeight || true) {
-    separatorHeight = 32;
+    separatorHeight = 8;
     separatorWidth = viewportWidth;
 
     emulatorWidth = viewportWidth;
