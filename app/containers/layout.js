@@ -6,6 +6,7 @@ const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
 const Header = require("../components/header").default;
+const Separator = require("../components/separator").default;
 const Footer = require("../components/footer").default;
 const Pane = require("../components/pane").default;
 const Editor = require("./editor").default;
@@ -46,6 +47,7 @@ export class Layout extends React.PureComponent {
       <Pane key="emulator" width={editorWidth} height={editorHeight}>
         <Emulator />
       </Pane>,
+      <Separator key="separator"/>,
       <Pane key="editor" width={emulatorWidth} height={emulatorHeight}>
         <Editor />
       </Pane>,
