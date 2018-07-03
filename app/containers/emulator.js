@@ -27,7 +27,7 @@ export class Emulator extends React.PureComponent {
     const { width, height } = this.props;
     return (
       <Wrapper width={width} height={height}>
-        <Canvas width={height - 10} height={height - 10} />
+        <Canvas width={height - 8} height={height - 8} />
       </Wrapper>
     );
   }

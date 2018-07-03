@@ -35,7 +35,7 @@ export class Editor extends React.PureComponent {
     gutters: ["syntaxErrors", "CodeMirror-linenumbers"],
     indentUnit: 2,
     indentWithTabs: false,
-    lineNumbers: true,
+    //lineNumbers: true,
     mode: "lua",
     //smartIndent: true,
     viewportMargin: Infinity,
