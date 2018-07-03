@@ -38,6 +38,7 @@ export class Editor extends React.PureComponent {
     //lineNumbers: true,
     mode: "lua",
     //smartIndent: true,
+    theme: "8bitcart",
     viewportMargin: Infinity,
   };
 

@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Overpass+Mono);
+
 .editor {
   height: 100%;
   width: 100%;
@@ -8,6 +10,7 @@
   width: 100%;
   font-size: 16px;
   background: #eee;
+  font-family: "Overpass Mono", monospace;
 }
 
 .CodeMirror-gutters {
@@ -31,4 +34,59 @@
   animation: pop 0.2s normal forwards ease-in-out;
 }
 
+
+$c0: #000000;
+$c1: #1D2B53;
+$c2: #7E2553;
+$c3: #008751;
+$c4: #AB5236;
+$c5: #5F574F;
+$c6: #C2C3C7;
+$c7: #FFF1E8;
+$c8: #FF004D;
+$c9: #FFA300;
+$c10: #FFEC27;
+$c11: #00E436;
+$c12: #29ADFF;
+$c13: #83769C;
+$c14: #FF77A8;
+$c15: #FFCCAA;
+
+$white: #f7c0a8;
+$white: #65a085;
+
+.cm-s-8bitcart.CodeMirror { color: $white; }
+.cm-s-8bitcart div.CodeMirror-selected { background: #49483E; }
+.cm-s-8bitcart .CodeMirror-line::selection, .cm-s-8bitcart .CodeMirror-line > span::selection, .cm-s-8bitcart .CodeMirror-line > span > span::selection { background: rgba(73, 72, 62, .99); }
+.cm-s-8bitcart .CodeMirror-line::-moz-selection, .cm-s-8bitcart .CodeMirror-line > span::-moz-selection, .cm-s-8bitcart .CodeMirror-line > span > span::-moz-selection { background: rgba(73, 72, 62, .99); }
+.cm-s-8bitcart .CodeMirror-gutters { background: $c5; border-right: 0px; }
+.cm-s-8bitcart .CodeMirror-guttermarker { color: white; }
+.cm-s-8bitcart .CodeMirror-guttermarker-subtle { color: #d0d0d0; }
+.cm-s-8bitcart .CodeMirror-linenumber { color: $c14; }
+.cm-s-8bitcart .CodeMirror-cursor { border-left: 2px solid $c8; }
+
+.cm-s-8bitcart span.cm-comment { color: $c13; }
+.cm-s-8bitcart span.cm-atom { color: #ae81ff; }
+.cm-s-8bitcart span.cm-number { color: $c12; }
+
+.cm-s-8bitcart span.cm-property, .cm-s-8bitcart span.cm-attribute { color: #a6e22e; }
+.cm-s-8bitcart span.cm-keyword { color: $c14; }
+.cm-s-8bitcart span.cm-builtin { color: #66d9ef; }
+.cm-s-8bitcart span.cm-string { color: $c12; }
+
+.cm-s-8bitcart span.cm-variable { color: $white; }
+.cm-s-8bitcart span.cm-variable-2 { color: #9effff; }
+.cm-s-8bitcart span.cm-variable-3, .cm-s-8bitcart span.cm-type { color: #66d9ef; }
+.cm-s-8bitcart span.cm-def { color: #fd971f; }
+.cm-s-8bitcart span.cm-bracket { color: $white; }
+.cm-s-8bitcart span.cm-tag { color: #f92672; }
+.cm-s-8bitcart span.cm-header { color: #ae81ff; }
+.cm-s-8bitcart span.cm-link { color: #ae81ff; }
+.cm-s-8bitcart span.cm-error { background: #f92672; color: #f8f8f0; }
+
+.cm-s-8bitcart .CodeMirror-activeline-background { background: #373831; }
+.cm-s-8bitcart .CodeMirror-matchingbracket {
+  text-decoration: underline;
+  color: white !important;
+}
 
