@@ -7,6 +7,19 @@
   height: 100%;
   width: 100%;
   font-size: 16px;
+  background: #eee;
+}
+
+.CodeMirror-gutters {
+  border-right: 0;
+}
+
+.CodeMirror-linenumbers {
+  background: #fae4ed;
+}
+
+.CodeMirror-linenumber {
+  color: #ccc;
 }
 
 @keyframes pop {
@@ -14,7 +27,8 @@
   to { height: 32px; }
 }
 
-
 .annotation {
   animation: pop 0.2s normal forwards ease-in-out;
 }
+
+

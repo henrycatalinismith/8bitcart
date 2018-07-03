@@ -11,17 +11,20 @@ const createStore = require("../reducers").default;
 const thunks = require("../thunks").default;
 
 document.addEventListener('DOMContentLoaded', () => {
+  const viewportWidth = window.innerWidth;
   const viewportHeight = window.innerHeight;
 
   const headerHeight = 32;
   const separatorHeight = 8;
   const footerHeight = 32;
+  const emulatorHeight = Math.min(viewportWidth, viewportHeight*0.75);
 
-  const availableHeight = (
+  const editorHeight = (
     viewportHeight
     - headerHeight
-    - footerHeight
+    - emulatorHeight
     - separatorHeight
+    - footerHeight
   );
 
   const initialState = {
@@ -29,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       started: new Date,
       updated: undefined,
       width: window.innerWidth,
-      height: availableHeight / 2,
+      height: editorHeight,
       syntaxErrorLine: undefined,
       syntaxErrorColumn: undefined,
       syntaxErrorMessage: undefined,
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
       started: undefined,
       stopped: undefined,
       width: window.innerWidth,
-      height: availableHeight / 2,
+      height: emulatorHeight,
     },
     viewport: {
       width: window.innerWidth,

@@ -39,16 +39,13 @@ export class Layout extends React.PureComponent {
     const { editorWidth, editorHeight } = this.props;
     const { emulatorWidth, emulatorHeight } = this.props;
 
-    const totalHeight = editorHeight + emulatorHeight;
-    const percent = emulatorHeight / totalHeight * 100;
-
     return [
       <Header key="header"/>,
-      <Pane key="emulator" width={editorWidth} height={editorHeight}>
+      <Pane key="emulator" width={emulatorWidth} height={emulatorHeight}>
         <Emulator />
       </Pane>,
       <Separator key="separator"/>,
-      <Pane key="editor" width={emulatorWidth} height={emulatorHeight}>
+      <Pane key="editor" width={editorWidth} height={editorHeight}>
         <Editor />
       </Pane>,
       <Footer key="footer"/>,
