@@ -15,23 +15,62 @@ document.addEventListener('DOMContentLoaded', () => {
   const viewportHeight = window.innerHeight;
 
   const headerHeight = 32;
-  const separatorHeight = 8;
-  const footerHeight = 32;
-  const emulatorHeight = Math.min(viewportWidth, viewportHeight*0.75);
+  const headerWidth = viewportWidth;
 
-  const editorHeight = (
-    viewportHeight
-    - headerHeight
-    - emulatorHeight
-    - separatorHeight
-    - footerHeight
-  );
+  let emulatorWidth;
+  let emulatorHeight;
+
+  let separatorHeight;
+  let separatorWidth;
+
+  let editorWidth;
+  let editorHeight;
+
+  const footerWidth = viewportWidth;
+  const footerHeight = 32;
+
+  if (viewportWidth < viewportHeight || true) {
+    separatorHeight = 32;
+    separatorWidth = viewportWidth;
+
+    emulatorWidth = viewportWidth;
+    emulatorHeight = Math.min(viewportWidth, viewportHeight*0.75);
+
+    editorWidth = viewportWidth;
+    editorHeight = (
+      viewportHeight
+      - headerHeight
+      - emulatorHeight
+      - separatorHeight
+      - footerHeight
+    );
+
+  } else {
+    // dead code roughly approximating landscape layout
+    separatorHeight = viewportHeight;
+    separatorWidth = 32;
+
+    emulatorWidth = Math.min(viewportHeight, viewportWidth*0.75);
+    emulatorHeight = viewportHeight;
+
+    editorWidth = (
+      viewportWidth
+      - emulatorWidth
+      - separatorWidth
+    );
+    editorHeight = (
+      viewportHeight
+      - headerHeight
+      - footerHeight
+    );
+  }
+
 
   const initialState = {
     editor: {
       started: new Date,
       updated: undefined,
-      width: window.innerWidth,
+      width: editorWidth,
       height: editorHeight,
       syntaxErrorLine: undefined,
       syntaxErrorColumn: undefined,
@@ -42,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       running: false,
       started: undefined,
       stopped: undefined,
-      width: window.innerWidth,
+      width: emulatorWidth,
       height: emulatorHeight,
     },
     viewport: {
