@@ -1,4 +1,13 @@
 .separator {
   background-color: #ed4d7f;
+}
+
+.separator--landscape {
+  width: 8px;
+  height: 100%;
+}
+
+.separator--portrait {
+  width: 100%;
   height: 8px;
 }

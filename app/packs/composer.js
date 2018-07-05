@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const footerWidth = viewportWidth;
   const footerHeight = 32;
 
-  if (viewportWidth < viewportHeight || true) {
+  if (viewportWidth < viewportHeight) {
     separatorHeight = 8;
     separatorWidth = viewportWidth;
 
@@ -48,10 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
   } else {
     // dead code roughly approximating landscape layout
     separatorHeight = viewportHeight;
-    separatorWidth = 32;
+    separatorWidth = 8;
 
     emulatorWidth = Math.min(viewportHeight, viewportWidth*0.75);
-    emulatorHeight = viewportHeight;
+    emulatorHeight = (
+      viewportHeight
+      - headerHeight
+      - footerHeight
+    );
 
     editorWidth = (
       viewportWidth

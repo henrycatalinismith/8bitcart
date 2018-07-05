@@ -6,14 +6,13 @@ const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
 const Header = require("../components/header").default;
-const Separator = require("../components/separator").default;
+const Panes = require("../containers/panes").default;
 const Footer = require("../components/footer").default;
-const Pane = require("../components/pane").default;
-const Editor = require("./editor").default;
-const Emulator = require("./emulator").default;
 
 export class Layout extends React.PureComponent {
   static mapStateToProps = state => ({
+    viewportWidth: select("viewport").from(state).width(),
+    viewportHeight: select("viewport").from(state).height(),
     editorWidth: select("editor").from(state).width(),
     editorHeight: select("editor").from(state).height(),
     emulatorWidth: select("emulator").from(state).width(),
@@ -25,6 +24,8 @@ export class Layout extends React.PureComponent {
   });
 
   static propTypes = {
+    viewportWidth: PropTypes.number,
+    viewportHeight: PropTypes.number,
     editorWidth: PropTypes.number,
     editorHeight: PropTypes.number,
     emulatorWidth: PropTypes.number,
@@ -36,18 +37,9 @@ export class Layout extends React.PureComponent {
   }
 
   render() {
-    const { editorWidth, editorHeight } = this.props;
-    const { emulatorWidth, emulatorHeight } = this.props;
-
     return [
       <Header key="header"/>,
-      <Pane key="emulator" width={emulatorWidth} height={emulatorHeight}>
-        <Emulator />
-      </Pane>,
-      <Separator key="separator"/>,
-      <Pane key="editor" width={editorWidth} height={editorHeight}>
-        <Editor />
-      </Pane>,
+      <Panes key="panes"/>,
       <Footer key="footer"/>,
     ];
   }
