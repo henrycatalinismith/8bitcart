@@ -46,27 +46,31 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
   } else {
-    // dead code roughly approximating landscape layout
     separatorHeight = viewportHeight;
     separatorWidth = 8;
 
-    emulatorWidth = Math.min(viewportHeight, viewportWidth*0.75);
+    //editorWidth = Math.min(512, viewportWidth - Math.min(viewportHeight, viewportWidth*0.75)) - separatorWidth;
+    editorWidth = 410;
+    //editorWidth = (
+      //viewportWidth
+      //- emulatorWidth
+      //- separatorWidth
+    //);
+    editorHeight = (
+      viewportHeight
+      - headerHeight
+      - footerHeight
+    );
+
+    //emulatorWidth = Math.min(viewportHeight, viewportWidth*0.75);
+    emulatorWidth = viewportWidth - editorWidth - separatorWidth;
     emulatorHeight = (
       viewportHeight
       - headerHeight
       - footerHeight
     );
 
-    editorWidth = (
-      viewportWidth
-      - emulatorWidth
-      - separatorWidth
-    );
-    editorHeight = (
-      viewportHeight
-      - headerHeight
-      - footerHeight
-    );
+
   }
 
 
