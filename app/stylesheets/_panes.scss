@@ -1,0 +1,36 @@
+.panes {
+  display: flex;
+}
+
+.panes--landscape {
+  flex-direction: row;
+
+  & .pane--tray {
+    order: 1;
+  }
+
+  & .separator {
+    order: 2;
+  }
+
+  & .pane--stage {
+    order: 3;
+  }
+}
+
+.panes--portrait {
+  flex-direction: column;
+
+  & .pane--stage {
+    order: 1;
+  }
+
+  & .separator {
+    order: 2;
+  }
+
+  & .pane--tray {
+    order: 3;
+  }
+}
+

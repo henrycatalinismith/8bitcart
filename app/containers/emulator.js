@@ -25,9 +25,10 @@ export class Emulator extends React.PureComponent {
 
   render() {
     const { width, height } = this.props;
+    const min = Math.min(width, height);
     return (
       <Wrapper width={width} height={height}>
-        <Canvas width={height - 8} height={height - 8} />
+        <Canvas width={min - 8} height={min - 8} />
       </Wrapper>
     );
   }
