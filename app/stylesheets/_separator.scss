@@ -3,11 +3,13 @@
 }
 
 .separator--landscape {
-  width: 8px;
+  width: 6px;
   height: 100%;
+  border-right: 2px solid #f192af;
 }
 
 .separator--portrait {
   width: 100%;
-  height: 8px;
+  height: 6px;
+  border-top: 2px solid #f192af;
 }
