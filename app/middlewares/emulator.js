@@ -10,23 +10,21 @@ let runTimeout;
 let parseTimeout;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [after(actions.CHANGE_CODE)](store, action) {
-    const code = select("editor").from(store).code();
-    if (parseTimeout) {
-      clearTimeout(parseTimeout);
-    }
-    if (runTimeout) {
-      clearTimeout(runTimeout);
-    }
-
-    runTimeout = setTimeout(() => {
-      store.dispatch(actions.parseCode(code));
-    }, 200);
-
-    runTimeout = setTimeout(() => {
-      store.dispatch(actions.startEmulator(code));
-    }, 2000);
-  },
+  //[after(actions.CHANGE_CODE)](store, action) {
+    //const code = select("editor").from(store).code();
+    //if (parseTimeout) {
+      //clearTimeout(parseTimeout);
+    //}
+    //if (runTimeout) {
+      //clearTimeout(runTimeout);
+    //}
+    //runTimeout = setTimeout(() => {
+      //store.dispatch(actions.parseCode(code));
+    //}, 200);
+    //runTimeout = setTimeout(() => {
+      //store.dispatch(actions.startEmulator(code));
+    //}, 2000);
+  //},
 
   [before(actions.START_EMULATOR)](store, action) {
     const running = select("emulator").from(store).running();
@@ -52,6 +50,9 @@ export const middleware = createMiddleware((cancel, before, after) => ({
 
   [after(actions.START_EMULATOR)](store, action) {
     const path = select("emulator").from(store).path();
+    if (!action.code) {
+      action.code = select("editor").from(store).code();
+    }
 
     if (screen === undefined) {
       screen = new Screen(document.querySelector("canvas"));
