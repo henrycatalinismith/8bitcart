@@ -2,10 +2,16 @@
   font-size: 16px;
   line-height: 32px;
   height: 32px;
-  border: 0;
   font-family: "Overpass Mono", monospace;
-  border-right: 1px solid #ed4d7e;
-  background: 0;
   padding: 2px 10px 0 10px;
   cursor: pointer;
+  background: #f29cba;
+  border: 1px solid #ed4d7e;
+  margin: 4px 0 4px 4px;
+}
+
+.play-button:focus,
+.play-button--focused {
+  outline: 0;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 1);
 }
