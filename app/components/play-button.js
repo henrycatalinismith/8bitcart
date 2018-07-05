@@ -2,9 +2,9 @@ const React = require("react");
 const PropTypes = require("prop-types");
 const classnames = require("classnames");
 
-export default class Pane extends React.Component {
+export default class PlayButton extends React.Component {
   static propTypes = {
-    playing: PropTypes.number,
+    playing: PropTypes.bool,
     onClick: PropTypes.func,
   };
 
