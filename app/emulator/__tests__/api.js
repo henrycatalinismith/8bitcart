@@ -64,7 +64,7 @@ describe("api", () => {
     it("clears the graphics buffer", () => {
       api.memset(0x6000, 0x77, 0x2000);
       api.cls();
-      for (let i = 0x6000; i <= 0x7fff; i++) {
+      for (let i = 0x6000; i < 0x7fff; i++) {
         expect(memory[i]).toBe(0);
       }
     });
@@ -146,27 +146,50 @@ describe("api", () => {
 
   describe("pget", () => {
     it("[left] gets the color value of a pixel at the given coordinates", () => {
-      memory[0x6000] = 8;
+      memory[0x6000] = 0x89;
       expect(api.pget(0, 0)).toBe(8);
     });
 
     it("[right] gets the color value of a pixel at the given coordinates", () => {
-      memory[0x6001] = 8;
-      expect(api.pget(1, 0)).toBe(8);
+      memory[0x6000] = 0x89;
+      expect(api.pget(1, 0)).toBe(9);
     });
   });
 
   describe("pset", () => {
+    it("does a bunch of stuff just like pico8", () => {
+      api.pset(0, 0, 1);
+      api.pset(1, 0, 1);
+      expect(memory[0x6000]).toBe(0x11);
+
+      api.pset(0, 0, 2);
+      api.pset(1, 0, 2);
+      expect(memory[0x6000]).toBe(0x22);
+
+      api.pset(0, 0, 3);
+      api.pset(1, 0, 3);
+      expect(memory[0x6000]).toBe(0x33);
+
+      api.pset(0, 0, 0);
+      api.pset(1, 0, 3);
+      expect(memory[0x6000]).toBe(0x03);
+
+      api.pset(0, 0, 8);
+      api.pset(1, 0, 9);
+      expect(memory[0x6000]).toBe(0x89);
+    });
+
     it("[left] sets a pixel in the graphics buffer", () => {
       api.pset(0, 0, 15);
-      expect(memory[0x6000]).toBe(15);
-      expect(memory[0x6001]).toBe(0);
+      expect(memory[0x6000]).toBe(0xF0);
+      expect(memory[0x6001]).toBe(0x00);
     });
 
     it("[right] sets a pixel in the graphics buffer", () => {
+      api.pset(0, 0, 8);
       api.pset(1, 0, 15);
-      expect(memory[0x6000]).toBe(0);
-      expect(memory[0x6001]).toBe(15);
+      expect(memory[0x6000]).toBe(0x8F);
+      expect(memory[0x6001]).toBe(0x00);
     });
   });
 
