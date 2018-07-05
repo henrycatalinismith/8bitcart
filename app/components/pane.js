@@ -4,7 +4,7 @@ const classnames = require("classnames");
 
 export default class Pane extends React.Component {
   static propTypes = {
-    children: PropTypes.object,
+    children: PropTypes.any,
     id: PropTypes.string,
     width: PropTypes.number,
     height: PropTypes.number,
