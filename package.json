@@ -27,5 +27,8 @@
   },
   "devDependencies": {
     "webpack-dev-server": "2.11.2"
+  },
+  "scripts": {
+    "test": "jest app/emulator"
   }
 }
