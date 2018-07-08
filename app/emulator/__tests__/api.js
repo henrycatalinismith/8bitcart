@@ -147,12 +147,12 @@ describe("api", () => {
   describe("pget", () => {
     it("[left] gets the color value of a pixel at the given coordinates", () => {
       memory[0x6000] = 0x89;
-      expect(api.pget(0, 0)).toBe(8);
+      expect(api.pget(0, 0)).toBe(9);
     });
 
     it("[right] gets the color value of a pixel at the given coordinates", () => {
       memory[0x6000] = 0x89;
-      expect(api.pget(1, 0)).toBe(9);
+      expect(api.pget(1, 0)).toBe(8);
     });
   });
 
@@ -172,25 +172,48 @@ describe("api", () => {
 
       api.pset(0, 0, 0);
       api.pset(1, 0, 3);
-      expect(memory[0x6000]).toBe(0x03);
+      expect(memory[0x6000]).toBe(0x30);
 
-      api.pset(0, 0, 8);
-      api.pset(1, 0, 9);
-      expect(memory[0x6000]).toBe(0x89);
+      api.pset(0, 0, 15);
+      api.pset(1, 0, 1);
+      expect(memory[0x6000]).toBe(31);
+    });
+
+    it("is symmetrical with pget", () => {
+      api.pset(0, 0, 1);
+      api.pset(1, 0, 1);
+      expect(api.pget(0, 0)).toBe(1);
+      expect(api.pget(1, 0)).toBe(1);
+
+      api.pset(2, 0, 2);
+      api.pset(3, 0, 2);
+      expect(api.pget(2, 0)).toBe(2);
+      expect(api.pget(3, 0)).toBe(2);
+
+      api.pset(4, 0, 0);
+      api.pset(5, 0, 3);
+      expect(api.pget(4, 0)).toBe(0);
+      expect(api.pget(5, 0)).toBe(3);
+
+      api.pset(6, 0, 15);
+      api.pset(7, 0, 1);
+      expect(api.pget(6, 0)).toBe(15);
+      expect(api.pget(7, 0)).toBe(1);
     });
 
     it("[left] sets a pixel in the graphics buffer", () => {
       api.pset(0, 0, 15);
-      expect(memory[0x6000]).toBe(0xF0);
+      expect(memory[0x6000]).toBe(0x0F);
       expect(memory[0x6001]).toBe(0x00);
     });
 
     it("[right] sets a pixel in the graphics buffer", () => {
       api.pset(0, 0, 8);
       api.pset(1, 0, 15);
-      expect(memory[0x6000]).toBe(0x8F);
+      expect(memory[0x6000]).toBe(248);
       expect(memory[0x6001]).toBe(0x00);
     });
+
   });
 
   describe("rnd", () => {

@@ -29,9 +29,9 @@ const pxc = (x, y, memory) => {
   const addr1 = 0x6000 + (64 * y) + Math.floor(x / 2);
   const side = x % 2 === 0 ? 'left' : 'right';
   if (side === 'left') {
-    return memory[addr1] >> 4;
-  } else {
     return memory[addr1] & 0x0f;
+  } else {
+    return memory[addr1] >> 4;
   }
 }
 
@@ -61,6 +61,20 @@ export default class Screen {
   }
 
   render() {
+    for (let addr = 0; addr < 8191; addr++) {
+      const x = addr % 64 * 2;
+      const y = addr / 64;
+      const left = this.memory[addr] & 0x0f;
+      const right = this.memory[addr] >> 4;
+
+      this.ctx.fillStyle = colors[left];
+      this.ctx.fillRect(x * this.px, y * this.px, this.px, this.px);
+
+      this.ctx.fillStyle = colors[right];
+      this.ctx.fillRect((x+1) * this.px, y * this.px, this.px, this.px);
+    }
+
+    /*
     for (let x = 0; x < 128; x++) {
       for (let y = 0; y < 128; y++) {
         const color = pxc(x, y, this.memory);
@@ -69,6 +83,7 @@ export default class Screen {
         this.ctx.fillRect(x * this.px, y * this.px, this.px, this.px);
       }
     }
+    */
 
     /*
     for (let addr = 0x6000; addr <= 0x7FFF; addr++) {
