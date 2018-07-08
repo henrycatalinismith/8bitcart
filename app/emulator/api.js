@@ -9,11 +9,10 @@ const pxa = (x, y) => {
 
 const pxc = (x, y, memory) => {
   const addr1 = 0x6000 + (64 * y) + Math.floor(x / 2);
-  const side = x % 2 === 0 ? 'left' : 'right';
-  if (side === 'left') {
-    return memory[addr1] >> 4;
-  } else {
+  if (x % 2 === 0) {
     return memory[addr1] & 0x0f;
+  } else {
+    return memory[addr1] >> 4;
   }
 }
 
@@ -88,17 +87,13 @@ module.exports = memory => ({
 
   pset(x, y, c) {
     const addr = 0x6000 + (y*64) + Math.floor(x/2);
-    const side = x % 2 === 0 ? 'left' : 'right';
     const left = memory[addr] >> 4;
     const right = memory[addr] & 0x0f;
-    if (side === 'left') {
+    if (x % 2 !== 0) {
       memory[addr] = (c << 4) | right;
     } else {
       memory[addr] = (left << 4) | c;
     }
-    //const addr = pxa(x, y);
-    //const even = x % 2 === 0;
-    //memory[addr] = c;
   },
 
   rnd(max) {
