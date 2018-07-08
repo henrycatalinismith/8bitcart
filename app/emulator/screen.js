@@ -64,7 +64,6 @@ export default class Screen {
     for (let addr = 0; addr <= 8191; addr++) {
       const x = addr % 64 * 2;
       const y = Math.floor(addr / 64);
-      //console.log(x, y);
       const left = this.memory[addr] & 0x0f;
       const right = this.memory[addr] >> 4;
 
