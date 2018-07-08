@@ -74,28 +74,6 @@ export default class Screen {
       this.ctx.fillRect((x+1) * this.px, y * this.px, this.px, this.px);
     }
 
-    /*
-    for (let x = 0; x < 128; x++) {
-      for (let y = 0; y < 128; y++) {
-        const color = pxc(x, y, this.memory);
-        //const color = this.memory[addr]
-        this.ctx.fillStyle = colors[color];
-        this.ctx.fillRect(x * this.px, y * this.px, this.px, this.px);
-      }
-    }
-    */
-
-    /*
-    for (let addr = 0x6000; addr <= 0x7FFF; addr++) {
-      const i = addr - 0x6000;
-      const x = (i * 2) % 128;
-      const y = Math.floor(i / 64);
-      const color = this.memory[addr]
-      this.ctx.fillStyle = colors[color];
-      this.ctx.fillRect(x * this.px, y * this.px, this.px, this.px);
-    }
-    */
-
     if (this.running) {
       requestAnimationFrame(this.render);
     }
