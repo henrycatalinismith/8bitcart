@@ -1,20 +1,23 @@
+// Maps pixel coordinates to memory addresses
+//
+// | Coordinates     | Address |
+// |-----------------|---------|
+// | pixel[0][0]     | 0x6000  |
+// | pixel[127][127] | 0x7fff  |
+// |-----------------|---------|
+const pixel = (function(width, height) {
+  const _pixel = [];
+  for (let x = 0; x < width; x++) {
+    _pixel.push([]);
+    for (let y = 0; y < height; y++) {
+      _pixel[x].push(0x6000 + (y * 64) + Math.floor(x / 2));
+    }
+  }
+  return _pixel;
+}(128, 128));
+
 const π = Math.PI;
 
-const pxa = (x, y) => {
-  const addr = 0x6000 + ((x >> 1) + y * 64)+1;
-  const and = x & 1;
-  const add = and ? 1 : 0;
-  return 0x6000 + ((x >> 1) + y * 64)+add;
-}
-
-const pxc = (x, y, memory) => {
-  const addr1 = 0x6000 + (64 * y) + Math.floor(x / 2);
-  if (x % 2 === 0) {
-    return memory[addr1] & 0x0f;
-  } else {
-    return memory[addr1] >> 4;
-  }
-}
 
 module.exports = memory => ({
   abs(num) {
@@ -82,18 +85,15 @@ module.exports = memory => ({
   },
 
   pget(x, y) {
-    return pxc(x, y, memory);
+    return x % 2 === 0
+      ? memory[pixel[x][y]] & 0x0f
+      : memory[pixel[x][y]] >> 4;
   },
 
   pset(x, y, c) {
-    const addr = 0x6000 + (y*64) + Math.floor(x/2);
-    const left = memory[addr] >> 4;
-    const right = memory[addr] & 0x0f;
-    if (x % 2 !== 0) {
-      memory[addr] = (c << 4) | right;
-    } else {
-      memory[addr] = (left << 4) | c;
-    }
+    memory[pixel[x][y]] = x % 2 === 0
+      ? ((memory[pixel[x][y]] >> 4) << 4) | c
+      : (c << 4) | (memory[pixel[x][y]] & 0x0f);
   },
 
   rnd(max) {
