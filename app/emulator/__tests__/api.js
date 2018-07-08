@@ -84,6 +84,20 @@ describe("api", () => {
     });
   });
 
+  describe("line", () => {
+    it("draws a straight horizontal line", () => {
+      api.line(0, 0, 1, 0, 3);
+      expect(api.pget(0, 0)).toBe(3);
+      expect(api.pget(1, 0)).toBe(3);
+    });
+
+    it("draws a straight vertical line", () => {
+      api.line(0, 0, 0, 1, 3);
+      expect(api.pget(0, 0)).toBe(3);
+      expect(api.pget(0, 1)).toBe(3);
+    });
+  });
+
   // cant get this to return output like the docs
   //describe("lshr", () => {
     //it("shifts the bits of a number to the right, using logical shift", () => {
