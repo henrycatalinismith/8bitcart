@@ -7,7 +7,7 @@ exports.createMiddleware = cb => {
     return next => action => {
       if (cancels[action.type]) {
         for (let cancel of cancels[action.type]) {
-          const shouldCancel = cancel.call(null, store, action);
+          const shouldCancel = cancel.call(null, action);
           if (shouldCancel === true) {
             return null;
           }
@@ -16,14 +16,14 @@ exports.createMiddleware = cb => {
 
       befores[action.type] &&
         befores[action.type].forEach(before => {
-          before.call(null, store, action);
+          before.call(null, action);
         });
 
       const result = next(action);
 
       afters[action.type] &&
         afters[action.type].forEach(after => {
-          after.call(null, store, action);
+          after.call(null, action);
         });
 
       return result;

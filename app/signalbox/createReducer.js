@@ -9,5 +9,6 @@ exports.createReducer = (initialState, actionHandlers) => {
     return state;
   };
 
+  reducer.actionHandlers = actionHandlers;
   return reducer;
 };

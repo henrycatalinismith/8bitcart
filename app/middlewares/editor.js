@@ -12,9 +12,9 @@ const select = require("../reducers/selectors").default;
 //const lineWidgets = [];
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [cancel(actions.CHANGE_CODE)](store, action) {
-    return action.editor.code === select("editor").from(store).code();
-  },
+  //[cancel(actions.CHANGE_CODE)](store, action) {
+    //return action.editor.code === select("editor").from(store).code();
+  //},
 
   //[before(actions.RESIZE_EMULATOR)](store, action) {
     //const viewportHeight = select("viewport").from(store).height();
