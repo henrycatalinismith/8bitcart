@@ -73,9 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   }
 
+  const cartHtml = document.querySelector("#cart");
+  const cartJson = cartHtml ? cartHtml.textContent : "{}";
+  const cartData = JSON.parse(cartJson);
 
   const initialState = {
     editor: {
+      code: cartData.lua,
       started: new Date,
       updated: undefined,
       width: editorWidth,

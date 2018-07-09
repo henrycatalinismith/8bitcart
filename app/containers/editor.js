@@ -42,8 +42,8 @@ export class Editor extends React.PureComponent {
     viewportMargin: Infinity,
   };
 
-  constructor(...props) {
-    super(...props);
+  constructor(props) {
+    super(props);
     this.state = {
       code: props.code,
     };
@@ -115,7 +115,6 @@ export class Editor extends React.PureComponent {
       //this.editor.setCursor(to)
     //}, 200);
 
-    console.log('markerr');
     this.tick = 0;
     clearInterval(this.interval);
     this.interval = setInterval(() => {
@@ -132,7 +131,6 @@ export class Editor extends React.PureComponent {
   }
 
   clearErrors() {
-    console.log('clearerr');
     clearInterval(this.interval);
     this.markers.forEach(marker => marker.clear());
     this.markers = [];

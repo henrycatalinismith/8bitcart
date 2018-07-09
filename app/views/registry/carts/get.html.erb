@@ -1,0 +1,5 @@
+<script id="cart" type="application/json">
+  <%=ActiveSupport::JSON.encode({
+    :lua => @cart.lua,
+  }).html_safe%>
+</script>
