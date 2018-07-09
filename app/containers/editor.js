@@ -54,6 +54,7 @@ export class Editor extends React.PureComponent {
 
   editorDidMount = editor => {
     this.editor = editor;
+    this.editor.refresh();
   };
 
   markError(error) {
