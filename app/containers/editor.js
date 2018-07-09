@@ -54,7 +54,7 @@ export class Editor extends React.PureComponent {
 
   editorDidMount = editor => {
     this.editor = editor;
-    this.editor.refresh();
+    setTimeout(() => this.editor.refresh(), 100);
   };
 
   markError(error) {
@@ -156,6 +156,7 @@ export class Editor extends React.PureComponent {
       options: Editor.codeMirrorOptions,
       value: this.state.code,
       editorDidMount: this.editorDidMount,
+      resizable: true,
 
       onBeforeChange: (editor, data, value) => {
         this.setState({ code: value });
