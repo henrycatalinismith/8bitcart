@@ -9,5 +9,5 @@
 Cart.create(
   address: "FFFFFF",
   name: "Blank Screen",
-  lua: "memset(0x6000, 0x77, 0x2000)"
+  lua: "memset(0x6000, 0x77, 0x2000)\n"
 )
