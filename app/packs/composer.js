@@ -97,12 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
       height: emulatorHeight,
     },
     layout: {
-      viewportWidth: window.innerWidth,
-      viewportHeight: window.innerHeight,
+      orientation: window.innerWidth > window.innerHeight ? "landscape" : "portrait",
       stageWidth: emulatorWidth,
       stageHeight: emulatorHeight,
       trayWidth: editorWidth,
       trayHeight: editorHeight,
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight,
     },
   };
 

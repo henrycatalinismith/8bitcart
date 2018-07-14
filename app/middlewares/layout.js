@@ -5,9 +5,14 @@ const actions = require("../actions").default;
 const select = require("../reducers/selectors").default;
 
 export const middleware = createMiddleware((cancel, before, after) => ({
-  [before(actions.START_EMULATOR)](store, action) {
+  [cancel(actions.HIDE_STAGE)](store, action) {
     const stageHeight = select("layout").from(store).stageHeight();
-    if (stageHeight === 0) {
+    return stageHeight === 0;
+  },
+
+  [before(actions.START_EMULATOR)](store, action) {
+    const stageHidden = select("layout").from(store).stageHidden();
+    if (stageHidden) {
       store.dispatch(actions.showStage());
     }
   },
