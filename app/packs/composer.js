@@ -96,10 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
       width: emulatorWidth,
       height: emulatorHeight,
     },
-    viewport: {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    }
+    layout: {
+      viewportWidth: window.innerWidth,
+      viewportHeight: window.innerHeight,
+      stageWidth: emulatorWidth,
+      stageHeight: emulatorHeight,
+      trayWidth: editorWidth,
+      trayHeight: editorHeight,
+    },
   };
 
   const store = createStore(initialState);

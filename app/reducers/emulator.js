@@ -29,6 +29,22 @@ export const reducer = createReducer(initialState, {
     };
   },
 
+  [actions.HIDE_EMULATOR](emulator, action) {
+    return {
+      ...emulator,
+      height: 0,
+      restoreHeight: emulator.height,
+    };
+  },
+
+  [actions.SHOW_EMULATOR](emulator, action) {
+    return {
+      ...emulator,
+      height: emulator.restoreHeight,
+      restoreHeight: undefined,
+    };
+  },
+
   [actions.RESIZE_EMULATOR](emulator, action) {
     return {
       ...emulator,

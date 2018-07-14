@@ -15,6 +15,8 @@ export default class Pane extends React.Component {
     const className = classnames({
       "pane": true,
       [`pane--${id}`]: true,
+      "pane--xhide": width === 0,
+      "pane--yhide": height === 0,
     });
 
     const style = {

@@ -1,11 +1,11 @@
 const editor = require("./editor").default;
+const layout = require("./layout").default;
 const emulator = require("./emulator").default;
-const viewport = require("./viewport").default;
 
 const actions = Object.assign({},
   editor,
+  layout,
   emulator,
-  viewport,
 );
 
 export default actions;
