@@ -9,9 +9,7 @@ const Pane = require("../components/pane").default;
 const Separator = require("../components/separator").default;
 const Wrapper = require("../components/panes").default;
 
-const Playback = require("./playback").default;
-const Editor = require("./editor").default;
-const Tabs = require("./tabs").default;
+const Tray = require("./tray").default;
 const Emulator = require("./emulator").default;
 
 export class Panes extends React.PureComponent {
@@ -45,9 +43,7 @@ export class Panes extends React.PureComponent {
         </Pane>
         <Separator width={viewportWidth} height={viewportHeight} />
         <Pane id="tray" width={trayWidth} height={trayHeight}>
-          <Playback />
-          <Editor />
-          <Tabs />
+          <Tray />
         </Pane>
       </Wrapper>
     );

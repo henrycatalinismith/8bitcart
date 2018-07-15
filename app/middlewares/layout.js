@@ -22,6 +22,13 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     }
   },
 
+  [before(actions.SELECT_TAB)](store, action) {
+    const focus = select("layout").from(store).focus();
+    if (focus === "stage") {
+      store.dispatch(actions.focusTray());
+    }
+  },
+
   [before(actions.START_EMULATOR)](store, action) {
     const layout = select("layout").from(store);
     const mobile = layout.mobile();
