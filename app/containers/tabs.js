@@ -21,7 +21,8 @@ export class Tabs extends React.PureComponent {
     const { trayWidth } = this.props;
     return (
       <TabList width={trayWidth}>
-        <Tab>Code</Tab>
+        <Tab active>Code</Tab>
+        <Tab>Help</Tab>
       </TabList>
     );
   }

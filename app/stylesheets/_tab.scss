@@ -1,14 +1,21 @@
 .tab {
   border: 0;
-  background: #eee;
   height: 28px;
-  margin: 0 0 0 4px;
-  border-radius: 0 0 8px 8px;
+  margin: 0 0 0 2px;
+  border-radius: 0 0 4px 4px;
   font-weight: bold;
   font-family: "Overpass Mono";
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .tab:focus {
   outline: none;
+}
+
+.tab--active {
+  background: #eee;
+}
+
+.tab--inactive {
+  background: #eb6c92;
 }
