@@ -49,6 +49,7 @@ export class Editor extends React.PureComponent {
     this.state = {
       code: props.code,
     };
+    this.errors = [];
     this.markers = [];
     this.gutterMarkers = [];
     this.lineWidgets = [];
@@ -76,80 +77,24 @@ export class Editor extends React.PureComponent {
       className: 'syntax-error',
     };
 
-    const text = string => {
-      const l = document.createElement('div');
-      l.className = "annotation";
-      l.style.backgroundColor = "#fff";
-      l.style.height = "32px";
-      l.style.fontSize = "14px";
-      l.style.color = "#ed484b";
-      l.style.paddingLeft = "4px";
-      l.style.paddingRight = "0px";
-      l.style.letterSpacing = "0px";
-      l.style.transform = "translateY(-3px)";
-      l.style.userSelect = "none";
-      l.style.cursor = "default";
-      //l.textContent = message;
-      l.innerHTML = string;
-      return l;
-    };
-
-    const face = emoji => {
-      const m = document.createElement('div');
-      m.textContent = emoji;
-      m.style.backgroundColor = "#f7f7f7";
-      m.style.height = "26px";
-      m.style.width = "28px";
-      m.style.textAlign = "right";
-      m.style.paddingRight = "0px";
-      m.style.fontSize = "27px";
-      m.style.lineHeight = "52px";
-      m.style.textIndent = "8px";
-      m.style.transform = "translateY(-12px)";
-      return m;
-    }
-
     this.editor.scrollTo(from)
-    this.markers.push(this.editor.markText(from, to, options));
-    this.gutterMarkers.push(this.editor.setGutterMarker(line - 1, "syntaxErrors", face("😅")));
-    this.lineWidgets.push(this.editor.addLineWidget(line - 1, text("&nbsp;".repeat(column-1) + "oops")));
-    this.lineWidgets.push(this.editor.addLineWidget(line - 2, text("")));
-    //setTimeout(() => {
-      //this.editor.setCursor(to)
-    //}, 200);
-
-    this.tick = 0;
-    clearInterval(this.interval);
-    this.interval = setInterval(() => {
-      if (!this.props.syntaxError) {
-        return;
-      }
-      const even = this.tick % 2 === 0;
-      const m = face(even ? "🤨" : "😅");
-      //this.editor.clearGutter("syntaxErrors");
-      this.gutterMarkers[0] = this.editor.setGutterMarker(line - 1, "syntaxErrors", m);
-      this.lineWidgets[0].node.innerHTML = "&nbsp;".repeat(column-1) + (even ? "oops" : "lol");
-      this.tick += 1;
-    }, 1000);
+    this.editor.addLineClass(line - 1, 'background', 'syntax-error');
+    this.errors.push(line - 1);
   }
 
   clearErrors() {
-    clearInterval(this.interval);
-    this.markers.forEach(marker => marker.clear());
-    this.markers = [];
-    this.gutterMarkers = [];
-    this.editor.clearGutter("syntaxErrors");
-    this.lineWidgets.forEach(l => this.editor.removeLineWidget(l));
-    this.lineWidgets = [];
+    this.errors.forEach(line => {
+      this.editor.removeLineClass(line, 'background', 'syntax-error');
+    });
+    this.errors = [];
   }
 
   render() {
     const { width, height, syntaxError } = this.props;
 
-    console.log(syntaxError, this.markers.length);
-    if (syntaxError && this.markers.length < 1) {
+    if (syntaxError && this.errors.length < 1) {
       this.markError(syntaxError);
-    } else if (!syntaxError && this.markers.length > 0) {
+    } else if (!syntaxError && this.errors.length > 0) {
       this.clearErrors();
     }
 

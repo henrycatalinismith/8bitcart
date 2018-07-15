@@ -39,6 +39,13 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       store.dispatch(actions.hideStage());
     }
   },
+
+  [after(actions.SHOW_STAGE)](store, action) {
+    const focus = select("layout").from(store).focus();
+    if (focus === "tray") {
+      store.dispatch(actions.focusStage());
+    }
+  },
 }));
 
 export default middleware;
