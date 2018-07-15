@@ -8,6 +8,7 @@ const select = require("../reducers/selectors").default;
 const Pane = require("../components/pane").default;
 const Separator = require("../components/separator").default;
 const Wrapper = require("../components/panes").default;
+const Help = require("../components/help").default;
 
 const Playback = require("./playback").default;
 const Editor = require("./editor").default;
@@ -32,6 +33,10 @@ export class Tray extends React.PureComponent {
       case "code":
         Tray.push(<Playback key="playback" />);
         Tray.push(<Editor key="editor" />);
+        break;
+
+      case "help":
+        Tray.push(<Help key="help" />);
         break;
     }
 

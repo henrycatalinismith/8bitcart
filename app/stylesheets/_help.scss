@@ -1,0 +1,51 @@
+.help {
+  background-color: #ebebeb;
+  padding: 16px 8px;
+  height: 100%;
+}
+
+.help h1 {
+  font-size: 24px;
+  margin: 0;
+  border-bottom: 1px solid #f2a0bc;
+  color: #d74044;
+  padding-bottom: 8px
+}
+
+.help h2 {
+  color: #d74044;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.help h2 small {
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.help p {
+  font-size: 18px;
+  font-family: Helvetica;
+  color: #1a412d;
+  line-height: 1.5em;
+}
+
+.help__function-name {
+  color: #4a9b0b;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: "Overpass Mono";
+  margin: 0;
+}
+
+.help__function-params {
+  color: #555;
+}
+
+.help__function-tldr {
+  margin: 0;
+  margin-top: -8px;
+  font-style: italic;
+  font-size: 16px !important;
+  color: #b44821 !important;
+}

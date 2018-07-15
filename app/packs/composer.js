@@ -111,11 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
     tabs: {
       code: {
         label: "Code",
-        active: true,
+        active: false,
       },
       help: {
         label: "Help",
-        active: false,
+        active: true,
       }
     }
   };
