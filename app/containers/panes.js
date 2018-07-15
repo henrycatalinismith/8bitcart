@@ -11,6 +11,7 @@ const Wrapper = require("../components/panes").default;
 
 const Playback = require("./playback").default;
 const Editor = require("./editor").default;
+const Tabs = require("./tabs").default;
 const Emulator = require("./emulator").default;
 
 export class Panes extends React.PureComponent {
@@ -46,6 +47,7 @@ export class Panes extends React.PureComponent {
         <Pane id="tray" width={trayWidth} height={trayHeight}>
           <Playback />
           <Editor />
+          <Tabs />
         </Pane>
       </Wrapper>
     );

@@ -1,0 +1,14 @@
+.tab {
+  border: 0;
+  background: #eee;
+  height: 28px;
+  margin: 0 0 0 4px;
+  border-radius: 0 0 8px 8px;
+  font-weight: bold;
+  font-family: "Overpass Mono";
+  font-size: 16px;
+}
+
+.tab:focus {
+  outline: none;
+}
