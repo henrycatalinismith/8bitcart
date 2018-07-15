@@ -19,6 +19,9 @@ const pixel = (function(width, height) {
 const π = Math.PI;
 
 const pset = (memory, x, y, c) => {
+  if (x < 0 || y < 0 || x > 127 || y > 127) {
+    return;
+  }
   memory[pixel[x][y]] = x % 2 === 0
     ? ((memory[pixel[x][y]] >> 4) << 4) | c
     : (c << 4) | (memory[pixel[x][y]] & 0x0f);
