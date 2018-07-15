@@ -16,14 +16,12 @@ export class Editor extends React.PureComponent {
 
   static mapDispatchToProps = dispatch => ({
     changeCode: code => dispatch(actions.changeCode(code)),
-    hideStage: () => dispatch(actions.hideStage()),
-    showStage: () => dispatch(actions.showStage()),
+    focusTray: () => dispatch(actions.focusTray()),
   });
 
   static propTypes = {
     changeCode: PropTypes.func,
-    hideStage: PropTypes.func,
-    showStage: PropTypes.func,
+    focusTray: PropTypes.func,
     width: PropTypes.number,
     height: PropTypes.number,
     syntaxError: PropTypes.shape({
@@ -171,7 +169,7 @@ export class Editor extends React.PureComponent {
       },
 
       onFocus: () => {
-        this.props.hideStage();
+        this.props.focusTray();
       },
     };
 

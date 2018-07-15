@@ -59,9 +59,42 @@ export const reducer = createReducer({}, {
         };
     }
   },
+
+  [actions.BLUR_STAGE](layout, action) {
+    return {
+      ...layout,
+      focus: undefined,
+    };
+  },
+
+  [actions.BLUR_TRAY](layout, action) {
+    return {
+      ...layout,
+      focus: undefined,
+    };
+  },
+
+  [actions.FOCUS_STAGE](layout, action) {
+    return {
+      ...layout,
+      focus: "stage",
+    };
+  },
+
+  [actions.FOCUS_TRAY](layout, action) {
+    return {
+      ...layout,
+      focus: "tray",
+    };
+  },
 });
 
 export const selectors = {
+  focus: layout => layout.focus,
+  mobile: layout => Math.max(
+    layout.screenWidth,
+    layout.screenHeight
+  ) <= 980,
   orientation: layout => layout.orientation,
   viewportWidth: layout => layout.viewportWidth,
   viewportHeight: layout => layout.viewportHeight,
