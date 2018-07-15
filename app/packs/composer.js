@@ -108,6 +108,16 @@ document.addEventListener('DOMContentLoaded', () => {
       viewportWidth: window.innerWidth,
       viewportHeight: window.innerHeight,
     },
+    tabs: {
+      code: {
+        label: "Code",
+        active: true,
+      },
+      help: {
+        label: "Help",
+        active: false,
+      }
+    }
   };
 
   const store = createStore(initialState);

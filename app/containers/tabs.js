@@ -10,19 +10,33 @@ const Tab = require("../components/tab").default;
 
 export class Tabs extends React.PureComponent {
   static mapStateToProps = state => ({
+    tabs: select("tabs").from(state).all(),
     trayWidth: select("layout").from(state).trayWidth(),
   });
 
+  static mapDispatchToProps = dispatch => ({
+    selectTab: key => dispatch(actions.selectTab(key)),
+  });
+
   static propTypes = {
+    selectTab: PropTypes.func,
+    tabs: PropTypes.object,
     trayWidth: PropTypes.number,
   };
 
   render() {
-    const { trayWidth } = this.props;
+    const { tabs, trayWidth } = this.props;
     return (
       <TabList width={trayWidth}>
-        <Tab active>Code</Tab>
-        <Tab>Help</Tab>
+        {Object.keys(tabs).map(key => {
+          const tab = tabs[key];
+          const onClick = this.props.selectTab.bind(null, key);
+          return (
+            <Tab key={key} active={tab.active} onClick={onClick}>
+              {tab.label}
+            </Tab>
+          );
+        })}
       </TabList>
     );
   }

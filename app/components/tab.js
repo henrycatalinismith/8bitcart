@@ -6,14 +6,16 @@ export default class TabList extends React.Component {
   static propTypes = {
     children: PropTypes.any,
     active: PropTypes.bool,
+    onClick: PropTypes.func,
   };
 
   static defaultProps = {
     active: false,
+    onClick: () => {},
   };
 
   render() {
-    const { children, active } = this.props;
+    const { children, active, onClick } = this.props;
 
     const className = classnames({
       "tab": true,
@@ -22,7 +24,7 @@ export default class TabList extends React.Component {
     });
 
     return (
-      <button className={className}>
+      <button className={className} onClick={onClick}>
         {children}
       </button>
     );
