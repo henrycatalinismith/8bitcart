@@ -20,14 +20,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const headerHeight = 32;
   const headerWidth = viewportWidth;
 
-  let emulatorWidth;
-  let emulatorHeight;
+  let stageWidth;
+  let stageHeight;
 
   let separatorHeight;
   let separatorWidth;
 
-  let editorWidth;
-  let editorHeight;
+  let trayWidth;
+  let trayHeight;
 
   const footerWidth = viewportWidth;
   const footerHeight = 32;
@@ -36,14 +36,14 @@ document.addEventListener('DOMContentLoaded', () => {
     separatorHeight = 8;
     separatorWidth = viewportWidth;
 
-    emulatorWidth = viewportWidth;
-    emulatorHeight = Math.min(viewportWidth, viewportHeight*0.75);
+    stageWidth = viewportWidth;
+    stageHeight = Math.min(viewportWidth, viewportHeight*0.75);
 
-    editorWidth = viewportWidth;
-    editorHeight = (
+    trayWidth = viewportWidth;
+    trayHeight = (
       viewportHeight
       - headerHeight
-      - emulatorHeight
+      - stageHeight
       - separatorHeight
       - footerHeight
     );
@@ -52,22 +52,22 @@ document.addEventListener('DOMContentLoaded', () => {
     separatorHeight = viewportHeight;
     separatorWidth = 8;
 
-    //editorWidth = Math.min(512, viewportWidth - Math.min(viewportHeight, viewportWidth*0.75)) - separatorWidth;
-    editorWidth = 410;
-    //editorWidth = (
+    //trayWidth = Math.min(512, viewportWidth - Math.min(viewportHeight, viewportWidth*0.75)) - separatorWidth;
+    trayWidth = 410;
+    //trayWidth = (
       //viewportWidth
-      //- emulatorWidth
+      //- stageWidth
       //- separatorWidth
     //);
-    editorHeight = (
+    trayHeight = (
       viewportHeight
       - headerHeight
       - footerHeight
     );
 
-    //emulatorWidth = Math.min(viewportHeight, viewportWidth*0.75);
-    emulatorWidth = viewportWidth - editorWidth - separatorWidth;
-    emulatorHeight = (
+    //stageWidth = Math.min(viewportHeight, viewportWidth*0.75);
+    stageWidth = viewportWidth - trayWidth - separatorWidth;
+    stageHeight = (
       viewportHeight
       - headerHeight
       - footerHeight
@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
       code: cartData.lua,
       started: new Date,
       updated: undefined,
-      width: editorWidth,
-      height: editorHeight,
+      width: trayWidth,
+      height: trayHeight,
       syntaxErrorLine: undefined,
       syntaxErrorColumn: undefined,
       syntaxErrorMessage: undefined,
@@ -96,16 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
       running: false,
       started: undefined,
       stopped: undefined,
-      width: emulatorWidth,
-      height: emulatorHeight,
+      width: stageWidth,
+      height: stageHeight,
     },
     layout: {
       focus: "stage",
       orientation: window.innerWidth > window.innerHeight ? "landscape" : "portrait",
-      stageWidth: emulatorWidth,
-      stageHeight: emulatorHeight,
-      trayWidth: editorWidth,
-      trayHeight: editorHeight,
+      stageWidth: stageWidth,
+      stageHeight: stageHeight,
+      trayWidth: trayWidth,
+      trayHeight: trayHeight,
       screenWidth: screen.width,
       screenHeight: screen.height,
       viewportWidth: window.innerWidth,
