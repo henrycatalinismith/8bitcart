@@ -129,6 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const root = document.createElement("div");
   root.className = "composer";
+  root.id = "root";
   document.body.appendChild(root);
   ReactDOM.render(
     <Provider store={store}>
