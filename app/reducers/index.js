@@ -1,5 +1,7 @@
 const { createStore, applyMiddleware, combineReducers, compose } = require("redux");
 const thunk = require("redux-thunk").default;
+const { connectRouter, routerMiddleware } = require("connected-react-router");
+
 const { createSelectors } = require("signalbox");
 
 const middleware = require("../middlewares").default;
@@ -16,13 +18,13 @@ const reducers = {
   tabs: tabs.reducer,
 };
 
-export default function (initialState) {
+export default function (initialState, history) {
   const reducer = combineReducers(reducers);
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const store = createStore(
-    reducer,
+    connectRouter(history)(reducer),
     initialState,
-    composeEnhancers(applyMiddleware(middleware, thunk))
+    composeEnhancers(applyMiddleware(middleware, thunk, routerMiddleware))
   );
 
   return store;

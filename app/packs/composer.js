@@ -1,6 +1,9 @@
 const React = require("react");
 const ReactDOM = require("react-dom");
 const { Provider } = require("react-redux");
+const { createBrowserHistory } = require("history");
+const { ConnectedRouter } = require("connected-react-router");
+const { Route, Switch } = require("react-router");
 
 const { createApp } = require("signalbox");
 const Layout = require("../containers/layout").default;
@@ -120,13 +123,26 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  const store = createStore(initialState);
+  const history = createBrowserHistory();
+  const store = createStore(initialState, history);
   const app = createApp(store, actions, middlewares, selectors, thunks);
 
   const root = document.createElement("div");
   root.className = "composer";
   document.body.appendChild(root);
-  ReactDOM.render(<Provider store={store}><Layout /></Provider>, root);
+  ReactDOM.render(
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        <Switch>
+          <Route exact path="/" render={() => (
+            <Layout />
+          )} />
+          <Route render={() => (<div>Miss</div>)} />
+        </Switch>
+      </ConnectedRouter>
+    </Provider>,
+    root
+  );
 
   window.addEventListener("resize", () => {
     app.dispatch.resizeViewport(
