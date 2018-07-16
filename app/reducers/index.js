@@ -24,7 +24,7 @@ export default function (initialState, history) {
   const store = createStore(
     connectRouter(history)(reducer),
     initialState,
-    composeEnhancers(applyMiddleware(middleware, thunk, routerMiddleware))
+    composeEnhancers(applyMiddleware(middleware, thunk, routerMiddleware(history)))
   );
 
   return store;
