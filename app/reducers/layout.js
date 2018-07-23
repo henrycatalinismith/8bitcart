@@ -172,5 +172,6 @@ export const selectors = {
   })[layout.orientation],
   trayWidth: layout => layout.trayWidth,
   trayHeight: layout => layout.trayHeight,
+  emulatorSize: layout => Math.min(layout.stageWidth, layout.stageHeight) - 8,
 };
 

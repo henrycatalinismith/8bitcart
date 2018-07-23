@@ -11,24 +11,22 @@ const Canvas = require("../components/canvas").default;
 export class Emulator extends React.PureComponent {
   static mapStateToProps = state => ({
     running: select("emulator").from(state).running(),
-    width: select("emulator").from(state).width(),
-    height: select("emulator").from(state).height(),
+    size: select("layout").from(state).emulatorSize(),
   });
 
   static mapDispatchToProps = dispatch => ({});
 
   static propTypes = {
     running: PropTypes.bool,
-    width: PropTypes.number,
-    height: PropTypes.number,
+    size: PropTypes.number,
   };
 
   render() {
-    const { width, height } = this.props;
+    const { width, height, size } = this.props;
     const min = Math.min(width, height);
     return (
       <Wrapper width={width} height={height}>
-        <Canvas width={min - 8} height={min - 8} />
+        <Canvas width={size} height={size} />
       </Wrapper>
     );
   }

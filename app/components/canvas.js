@@ -18,12 +18,14 @@ export default class Canvas extends React.Component {
   }
 
   render() {
+    const { width, height } = this.props;
+    console.log(width, height);
     return (
       <canvas
         ref={this.setElement}
         className="canvas"
-        width={this.props.width}
-        height={this.props.height}
+        width={width}
+        height={height}
       />
     );
   }
