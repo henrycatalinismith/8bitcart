@@ -52,13 +52,17 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       console.log(oldHeight, newHeight);
       window.scroll(0, 0);
 
-      store.dispatch(actions.changeCode(`${oldHeight} -> ${newHeight}`));
 
-      if (oldHeight !== newHeight) {
-        app.dispatch.resizeViewport(
+      window.scroll(0, 10);
+      const keyboard = window.scrollY > 0;
+      window.scroll(0, 0);
+      store.dispatch(actions.changeCode(`${keyboard}`));
+
+      if (keyboard) {
+        store.dispatch(actions.resizeViewport(
           window.innerWidth,
           window.innerHeight
-        );
+        ));
       }
     }, 100);
   },
