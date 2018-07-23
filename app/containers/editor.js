@@ -55,6 +55,12 @@ export class Editor extends React.PureComponent {
     this.lineWidgets = [];
   }
 
+  componentDidUpdate() {
+    if (this.props.code !== this.state.code) {
+      this.setState({ code: this.props.code });
+    }
+  }
+
   editorDidMount = editor => {
     this.editor = editor;
     setTimeout(() => this.editor.refresh(), 100);
