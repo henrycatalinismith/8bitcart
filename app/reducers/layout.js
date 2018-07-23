@@ -2,15 +2,81 @@ const { createReducer } = require("signalbox");
 
 const actions = require("../actions").default;
 
+const o = (w, h) => w > h ? "landscape" : "portrait";
+
 export const reducer = createReducer({}, {
   [actions.RESIZE_VIEWPORT](layout, action) {
+    const { viewportWidth, viewportHeight } = action;
+    const oldOrientation = layout.orientation;
+    const newOrientation = o(viewportWidth, viewportHeight);
+    const orientationChange = oldOrientation !== newOrientation;
+
+    const headerHeight = 32;
+    const headerWidth = viewportWidth;
+    const footerWidth = viewportWidth;
+    const footerHeight = 32;
+
+    let separatorHeight;
+    let separatorWidth;
+    let stageHeight;
+    let stageWidth;
+    let trayHeight;
+    let trayWidth;
+
+    if (newOrientation === "landscape") {
+      separatorHeight = viewportHeight;
+      separatorWidth = 8;
+
+      //trayWidth = Math.min(512, viewportWidth - Math.min(viewportHeight, viewportWidth*0.75)) - separatorWidth;
+      trayWidth = 410;
+      //trayWidth = (
+        //viewportWidth
+        //- stageWidth
+        //- separatorWidth
+      //);
+      trayHeight = (
+        viewportHeight
+        - headerHeight
+        - footerHeight
+      );
+      //trayWidth = 0;
+
+      stageWidth = viewportWidth - trayWidth - separatorWidth;
+      stageHeight = (
+        viewportHeight
+        - headerHeight
+        - footerHeight
+      );
+    } else {
+      separatorHeight = 8;
+      separatorWidth = viewportWidth;
+
+      stageWidth = viewportWidth;
+      stageHeight = Math.min(viewportWidth, viewportHeight*0.75);
+
+      trayWidth = viewportWidth;
+      trayHeight = (
+        viewportHeight
+        - headerHeight
+        - stageHeight
+        - separatorHeight
+        - footerHeight
+      );
+    }
+
     return {
       ...layout,
       orientation: action.viewportWidth > action.viewportHeight
         ? "landscape"
         : "portrait",
-      viewportWidth: action.viewportWidth,
+      separatorHeight,
+      separatorWidth,
+      stageHeight,
+      stageWidth,
+      trayHeight,
+      trayWidth,
       viewportHeight: action.viewportHeight,
+      viewportWidth: action.viewportWidth,
     };
   },
 
