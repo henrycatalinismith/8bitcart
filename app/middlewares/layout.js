@@ -52,13 +52,15 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       console.log(oldHeight, newHeight);
       window.scroll(0, 0);
 
+      alert(`${oldHeight} -> ${newHeight}`);
+
       if (oldHeight !== newHeight) {
         app.dispatch.resizeViewport(
           window.innerWidth,
           window.innerHeight
         );
       }
-    }, 20);
+    }, 100);
   },
 
   [after(actions.SHOW_STAGE)](store, action) {
