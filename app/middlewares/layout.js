@@ -46,13 +46,13 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       store.dispatch(actions.hideStage());
     }
 
+    const oldHeight = select("layout").from(store).viewportHeight();
     setTimeout(() => {
-      const oldHeight = select("layout").from(store).viewportHeight();
       const newHeight = window.innerHeight;
       console.log(oldHeight, newHeight);
       window.scroll(0, 0);
 
-      alert(`${oldHeight} -> ${newHeight}`);
+      store.dispatch(actions.changeCode(`${oldHeight} -> ${newHeight}`));
 
       if (oldHeight !== newHeight) {
         app.dispatch.resizeViewport(
