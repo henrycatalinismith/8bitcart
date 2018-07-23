@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
       - headerHeight
       - footerHeight
     );
+    //trayWidth = 0;
 
     //stageWidth = Math.min(viewportHeight, viewportWidth*0.75);
     stageWidth = viewportWidth - trayWidth - separatorWidth;

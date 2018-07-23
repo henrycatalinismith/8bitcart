@@ -31,18 +31,18 @@ export const middleware = createMiddleware((cancel, before, after) => ({
 
   [before(actions.START_EMULATOR)](store, action) {
     const layout = select("layout").from(store);
-    const mobile = layout.mobile();
+    const portrait = select("layout").from(store).orientation() === "portrait";
     const stageHidden = layout.stageHidden();
-    console.log(mobile, stageHidden);
-    if (mobile && stageHidden) {
+    console.log(portrait, stageHidden);
+    if (portrait && stageHidden) {
       store.dispatch(actions.showStage());
     }
   },
 
   [after(actions.FOCUS_TRAY)](store, action) {
-    const mobile = select("layout").from(store).mobile();
-    console.log(mobile);
-    if (mobile) {
+    const orientation = select("layout").from(store).orientation();
+    console.log(orientation);
+    if (orientation === "portrait") {
       store.dispatch(actions.hideStage());
     }
   },
