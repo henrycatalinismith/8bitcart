@@ -45,6 +45,20 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     if (orientation === "portrait") {
       store.dispatch(actions.hideStage());
     }
+
+    setTimeout(() => {
+      const oldHeight = select("layout").from(store).viewportHeight();
+      const newHeight = window.innerHeight;
+      console.log(oldHeight, newHeight);
+      window.scroll(0, 0);
+
+      if (oldHeight !== newHeight) {
+        app.dispatch.resizeViewport(
+          window.innerWidth,
+          window.innerHeight
+        );
+      }
+    }, 20);
   },
 
   [after(actions.SHOW_STAGE)](store, action) {
