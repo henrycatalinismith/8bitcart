@@ -14,6 +14,7 @@ const Emulator = require("./emulator").default;
 
 export class Panes extends React.PureComponent {
   static mapStateToProps = state => ({
+    orientation: select("layout").from(state).orientation(),
     viewportWidth: select("layout").from(state).viewportWidth(),
     viewportHeight: select("layout").from(state).viewportHeight(),
     trayWidth: select("layout").from(state).trayWidth(),
@@ -23,6 +24,7 @@ export class Panes extends React.PureComponent {
   });
 
   static propTypes = {
+    orientation: PropTypes.string,
     viewportWidth: PropTypes.number,
     viewportHeight: PropTypes.number,
     trayWidth: PropTypes.number,
@@ -32,12 +34,12 @@ export class Panes extends React.PureComponent {
   };
 
   render() {
-    const { viewportWidth, viewportHeight } = this.props;
+    const { orientation, viewportWidth, viewportHeight } = this.props;
     const { trayWidth, trayHeight } = this.props;
     const { stageWidth, stageHeight } = this.props;
 
     return (
-      <Wrapper width={viewportWidth} height={viewportHeight}>
+      <Wrapper width={viewportWidth} height={viewportHeight} orientation={orientation}>
         <Pane id="stage" width={stageWidth} height={stageHeight}>
           <Emulator />
         </Pane>

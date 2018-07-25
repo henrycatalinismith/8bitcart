@@ -5,16 +5,17 @@ const classnames = require("classnames");
 export default class Panes extends React.Component {
   static propTypes = {
     children: PropTypes.any,
+    orientation: PropTypes.string,
     width: PropTypes.number,
     height: PropTypes.number,
   };
 
   render() {
-    const { children, width, height } = this.props;
+    const { children, width, height, orientation } = this.props;
     const className = classnames({
       "panes": true,
-      "panes--landscape": width >= height,
-      "panes--portrait": width < height,
+      "panes--landscape": orientation === "landscape",
+      "panes--portrait": orientation === "portrait",
     });
 
     return (

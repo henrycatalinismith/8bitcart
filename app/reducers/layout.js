@@ -4,6 +4,9 @@ const actions = require("../actions").default;
 
 const o = (w, h) => w > h ? "landscape" : "portrait";
 
+const headerHeight = 32;
+const footerHeight = 32;
+
 export const reducer = createReducer({}, {
   [actions.RESIZE_VIEWPORT](layout, action) {
     const { viewportWidth, viewportHeight } = action;
@@ -11,10 +14,8 @@ export const reducer = createReducer({}, {
     const newOrientation = o(viewportWidth, viewportHeight);
     const orientationChange = oldOrientation !== newOrientation;
 
-    const headerHeight = 32;
     const headerWidth = viewportWidth;
     const footerWidth = viewportWidth;
-    const footerHeight = 32;
 
     let separatorHeight;
     let separatorWidth;
