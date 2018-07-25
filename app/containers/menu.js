@@ -20,7 +20,7 @@ export class Menu extends React.PureComponent {
     return (
       <ReactBurgerMenu key="menu" right width={300} pageWrapId="page" outerContainerId="root">
         <MenuItem href="/">Home</MenuItem>
-        <MenuItem href="/sign-up">Sign Up</MenuItem>
+        <MenuItem href="/browse">Browse</MenuItem>
       </ReactBurgerMenu>
     );
   }

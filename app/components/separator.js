@@ -21,6 +21,7 @@ export default class Separator extends React.Component {
 
     const style = {
       height: `${(landscape ? height - 64 : 8)}px`,
+      width: landscape ? "8px" : "100%",
     }
 
     return (

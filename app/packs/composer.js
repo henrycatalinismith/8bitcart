@@ -6,6 +6,7 @@ const { ConnectedRouter } = require("connected-react-router");
 const { Route, Switch } = require("react-router");
 
 const { createApp } = require("signalbox");
+const Emulator = require("../containers/emulator").default;
 const Layout = require("../containers/layout").default;
 const actions = require("../actions").default;
 const middlewares = require("../middlewares").default;
@@ -102,13 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     },
     layout: {
       focus: "stage",
-      orientation: window.innerWidth > window.innerHeight ? "landscape" : "portrait",
-      stageWidth: stageWidth,
-      stageHeight: stageHeight,
-      trayWidth: trayWidth,
-      trayHeight: trayHeight,
-      screenWidth: screen.width,
-      screenHeight: screen.height,
+      pathname: window.location.pathname,
       viewportWidth: window.innerWidth,
       viewportHeight: window.innerHeight,
     },
@@ -128,6 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const store = createStore(initialState, history);
   const app = createApp(store, actions, middlewares, selectors, thunks);
 
+  app.dispatch.pageLoad(
+    window.innerWidth,
+    window.innerHeight,
+    window.location.pathname,
+  );
+
   const root = document.createElement("div");
   root.className = "composer";
   root.id = "root";
@@ -137,7 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
       <ConnectedRouter history={history}>
         <Switch>
           <Route exact path="/" render={() => (
-            <Layout />
+            <Layout>
+              <Emulator />
+            </Layout>
+          )} />
+          <Route exact path="/browse" render={() => (
+            <Layout>
+              browse
+            </Layout>
           )} />
           <Route render={() => (<div>Miss</div>)} />
         </Switch>
@@ -152,5 +160,6 @@ document.addEventListener('DOMContentLoaded', () => {
       window.innerHeight
     );
   });
+
 });
 

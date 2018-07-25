@@ -19,6 +19,7 @@ export class Layout extends React.PureComponent {
   });
 
   static propTypes = {
+    children: PropTypes.any,
     viewportHeight: PropTypes.number,
   };
 
@@ -27,7 +28,9 @@ export class Layout extends React.PureComponent {
       <Menu key="menu" />,
       <div key="page" id="page" style={{ height: this.props.viewportHeight }}>
         <Header key="header"/>
-        <Panes key="panes"/>
+        <Panes key="panes">
+          {this.props.children}
+        </Panes>
         <Footer key="footer"/>
       </div>,
     ];
