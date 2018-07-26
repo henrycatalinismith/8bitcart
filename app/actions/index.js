@@ -1,3 +1,6 @@
+const { push } = require("connected-react-router");
+const router = { push };
+
 const editor = require("./editor").default;
 const emulator = require("./emulator").default;
 const global = require("./global").default;
@@ -9,6 +12,7 @@ const actions = Object.assign({},
   emulator,
   global,
   layout,
+  router,
   tabs,
 );
 

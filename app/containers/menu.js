@@ -3,7 +3,7 @@ const PropTypes = require("prop-types");
 const { connect } = require("react-redux");
 const { slide: ReactBurgerMenu } = require("react-burger-menu");
 
-//const actions = require("../actions").default;
+const actions = require("../actions").default;
 //const select = require("../reducers/selectors").default;
 const MenuItem = require("../components/menu-item").default;
 
@@ -12,15 +12,48 @@ export class Menu extends React.PureComponent {
     //viewportWidth: select("layout").from(state).viewportWidth(),
   });
 
+  static mapDispatchToProps = dispatch => ({
+    navigate: path => dispatch(actions.push(path)),
+  });
+
   static propTypes = {
-    //viewportWidth: PropTypes.number,
+    navigate: PropTypes.func,
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = { isOpen: false };
+  }
+
+  onStateChange = state => {
+    this.setState(state);
+  };
+
+  navigate = path => event => {
+    event.preventDefault();
+    this.props.navigate(path);
+    this.setState({ isOpen: false });
   };
 
   render() {
+    const menuProps = {
+      key: "menu",
+      right: true,
+      width: 300,
+      pageWrapId: "page",
+      outerContainerId: "root",
+      isOpen: this.state.isOpen,
+      onStateChange: this.onStateChange,
+    };
+
     return (
-      <ReactBurgerMenu key="menu" right width={300} pageWrapId="page" outerContainerId="root">
-        <MenuItem href="/">Home</MenuItem>
-        <MenuItem href="/browse">Browse</MenuItem>
+      <ReactBurgerMenu {...menuProps}>
+        <MenuItem href="/" onClick={this.navigate("/")}>
+          Home
+        </MenuItem>
+        <MenuItem href="/browse" onClick={this.navigate("/browse")}>
+          Browse
+        </MenuItem>
       </ReactBurgerMenu>
     );
   }

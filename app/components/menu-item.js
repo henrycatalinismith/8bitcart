@@ -3,14 +3,15 @@ const PropTypes = require("prop-types");
 
 export default class MenuItem extends React.Component {
   static propTypes = {
-    href: PropTypes.string,
     children: PropTypes.any,
+    href: PropTypes.string,
+    onClick: PropTypes.func,
   };
 
   render() {
-    const { href, children } = this.props;
+    const { href, children, onClick } = this.props;
     return (
-      <a className="menu-item" href={href}>
+      <a className="menu-item" href={href} onClick={onClick}>
         {children}
       </a>
     );

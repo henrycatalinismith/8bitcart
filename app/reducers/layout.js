@@ -67,7 +67,14 @@ const l = (layout, viewport, pathname) => {
 export const reducer = createReducer({}, {
   [actions.PAGE_LOAD](layout, action) {
     const newLayout = l(layout, action, action.pathname);
+    return {
+      ...layout,
+      ...newLayout,
+    };
+  },
 
+  "@@router/LOCATION_CHANGE": (layout, action) => {
+    const newLayout = l(layout, layout, action.payload.location.pathname);
     return {
       ...layout,
       ...newLayout,
@@ -76,7 +83,6 @@ export const reducer = createReducer({}, {
 
   [actions.RESIZE_VIEWPORT](layout, action) {
     const newLayout = l(layout, action, layout.pathname);
-
     return {
       ...layout,
       ...newLayout,
