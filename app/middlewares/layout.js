@@ -15,6 +15,13 @@ export const middleware = createMiddleware((cancel, before, after) => ({
     return stageHeight === 0;
   },
 
+  [before("@@router/LOCATION_CHANGE")](store, action) {
+    const focus = select("layout").from(store).focus();
+    if (focus === "tray") {
+      store.dispatch(actions.focusTray());
+    }
+  },
+
   [before(actions.FOCUS_TRAY)](store, action) {
     const focus = select("layout").from(store).focus();
     if (focus === "stage") {
