@@ -57,10 +57,10 @@ export const middleware = createMiddleware((cancel, before, after) => ({
       window.scroll(0, 0);
 
       if (keyboard) {
-        store.dispatch(actions.resizeViewport(
-          window.innerWidth,
-          window.innerHeight
-        ));
+        //store.dispatch(actions.resizeViewport(
+          //window.innerWidth,
+          //window.innerHeight
+        //));
       }
     }, 100);
   },
