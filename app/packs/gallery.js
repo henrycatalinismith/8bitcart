@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 
   const root = document.createElement("div");
-  root.className = "composer";
+  root.className = "gallery";
   root.id = "root";
   document.body.appendChild(root);
   ReactDOM.render(

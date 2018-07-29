@@ -1,10 +1,8 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
+  scope module: :gallery do
+    get "/", to: "welcome#index"
+    get '/new', to: "carts#new"
 
-  get '/new', to: 'welcome#index'
-  get '/sign-up', to: 'welcome#index'
-
-  scope module: :registry do
     match '/:address' => 'carts#get',
       :via => :get,
       :requirements => {
