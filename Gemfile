@@ -55,4 +55,5 @@ gem "codemirror-rails"
 gem "webpacker", "~> 3.5"
 gem "chunky_png"
 gem "mini_racer", platforms: :ruby
+gem "cloudinary"
 

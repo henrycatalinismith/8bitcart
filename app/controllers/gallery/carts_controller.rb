@@ -21,6 +21,12 @@ module Gallery
       @address = params[:address][2 .. params[:address].length]
       @cart = Cart.find_by(address: @address)
 
+      @image = @cart.latest_image
+      if !@image.nil?
+        redirect_to @image.url, status: 302
+        return
+      end
+
       bundle_name = "snapshot.js"
       manifest = Webpacker.manifest.lookup(bundle_name)
       filename = Rails.root.join(File.join("public", manifest)).to_s
@@ -62,11 +68,17 @@ module Gallery
         end
       end
 
-      send_data(
-        @png.to_datastream,
-        type: "image/png",
-        disposition: "inline"
-      )
+      response = Cloudinary::Uploader.upload(@png.to_data_url)
+
+      @image = @cart.images.create({
+        :url => response["secure_url"]
+      })
+
+      @image.save
+      @cart.save
+
+      redirect_to @image.url, status: 302
+      return
     end
   end
 end
