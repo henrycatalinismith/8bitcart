@@ -49,7 +49,7 @@ module Gallery
       ];
 
       pixels = {}
-      context = MiniRacer::Context.new(timeout: 1000)
+      context = MiniRacer::Context.new(timeout: 3000)
       context.attach("update", proc{|p| pixels = p })
       context.eval(javascript)
 
