@@ -9,9 +9,6 @@ gem "puma", "~> 3.11"
 gem "sass-rails", "~> 5.0"
 gem "uglifier", ">= 1.3.0"
 
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem "mini_racer", platforms: :ruby
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.5"
 
@@ -56,3 +53,6 @@ gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "codemirror-rails"
 gem "webpacker", "~> 3.5"
+gem "chunky_png"
+gem "mini_racer", platforms: :ruby
+
