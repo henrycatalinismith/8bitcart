@@ -1,0 +1,53 @@
+.first-impression {
+  background: #fefefe;
+  padding: 8px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/*
+@media (min-width: 1024px) {
+  .first-impression {
+    flex-direction: row;
+  }
+}
+*/
+
+.first-impression__description {
+  font-family: "Overpass Mono";
+  //font-weight: bold;
+  margin: 16px 0;
+  font-size: 20px;
+  line-height: 32px;
+  max-width: 410px;
+}
+
+.nice {
+  font-weight: bold;
+  color: #ed4d7e;
+  background: rgba(237,77,125, 0.1);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.cute {
+  font-weight: bold;
+  color: #ef6730;
+  background: rgba(239,103,48, 0.1);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.first-impression__checklist {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.first-impression__action {
+  padding: 4px 16px;
+  font-size: 16px;
+  font-family: Helvetica;
+}
+

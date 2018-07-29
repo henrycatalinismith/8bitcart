@@ -7,7 +7,10 @@ const o = (w, h) => w > h ? "landscape" : "portrait";
 const headerHeight = 32;
 const footerHeight = 32;
 
-const trayPathnames = ["/"];
+const trayPathnames = [
+  "/new",
+  /^\/0x[0-9A-F]{6}$/,
+];
 
 const l = (layout, viewport, pathname) => {
   const { viewportWidth, viewportHeight } = viewport;
@@ -15,7 +18,13 @@ const l = (layout, viewport, pathname) => {
   const orientation = o(viewportWidth, viewportHeight);
   const headerWidth = viewportWidth;
   const footerWidth = viewportWidth;
-  const trayVisible = trayPathnames.includes(pathname);
+  const trayVisible = trayPathnames.filter(p => {
+    if (typeof p === "string") {
+      return p === pathname;
+    } else {
+      return p.test(pathname);
+    }
+  }).length > 0;
 
   let separatorHeight;
   let separatorWidth;

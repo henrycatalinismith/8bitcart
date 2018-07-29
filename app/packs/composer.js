@@ -6,8 +6,11 @@ const { ConnectedRouter } = require("connected-react-router");
 const { Route, Switch } = require("react-router");
 
 const { createApp } = require("signalbox");
+
 const Emulator = require("../containers/emulator").default;
 const Layout = require("../containers/layout").default;
+const WelcomeIndex = require("../containers/welcome-index").default;
+
 const actions = require("../actions").default;
 const middlewares = require("../middlewares").default;
 const selectors = require("../reducers/selectors").default;
@@ -137,17 +140,27 @@ document.addEventListener('DOMContentLoaded', () => {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <Switch>
+
           <Route exact path="/" render={() => (
+            <Layout>
+              <WelcomeIndex />
+            </Layout>
+          )} />
+
+          <Route exact path="/new" render={() => (
             <Layout>
               <Emulator />
             </Layout>
           )} />
-          <Route exact path="/browse" render={() => (
+
+          <Route exact path="/(0x[0-9A-F]{6})" render={() => (
             <Layout>
-              browse
+              <Emulator />
             </Layout>
           )} />
+
           <Route render={() => (<div>Miss</div>)} />
+
         </Switch>
       </ConnectedRouter>
     </Provider>,
