@@ -82,7 +82,6 @@ module Gallery
       @cart.save
 
       redirect_to url_for(@snapshot), status: 302
-      return
     end
   end
 end
