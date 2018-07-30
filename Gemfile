@@ -56,4 +56,7 @@ gem "webpacker", "~> 3.5"
 gem "chunky_png"
 gem "mini_racer", platforms: :ruby
 gem "cloudinary"
+gem "activestorage-cloudinary-service"
+gem "dotenv-rails", groups: [:development, :test]
+gem "shrine", "~> 2.0"
 

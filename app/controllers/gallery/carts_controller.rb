@@ -21,9 +21,9 @@ module Gallery
       @address = params[:address][2 .. params[:address].length]
       @cart = Cart.find_by(address: @address)
 
-      @image = @cart.latest_image
-      if !@image.nil?
-        redirect_to @image.url, status: 302
+      @snapshot = @cart.snapshots.last
+      if !@snapshot.nil?
+        redirect_to url_for(@snapshot), status: 302
         return
       end
 
@@ -68,16 +68,20 @@ module Gallery
         end
       end
 
-      response = Cloudinary::Uploader.upload(@png.to_data_url)
+      tempfile = Tempfile.new("fileupload")
+      tempfile.binmode
+      tempfile.write(@png)
+      tempfile.rewind()
 
-      @image = @cart.images.create({
-        :url => response["secure_url"]
-      })
+      @snapshot = @cart.snapshots.attach(
+        io: tempfile,
+        filename: "#{@address}.png",
+        content_type: "image/png",
+      )
 
-      @image.save
       @cart.save
 
-      redirect_to @image.url, status: 302
+      redirect_to @snapshot.url, status: 302
       return
     end
   end
